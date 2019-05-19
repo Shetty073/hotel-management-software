@@ -2,7 +2,13 @@
 
 // Session data
 session_start();
-$_SESSION["loggedin"] = false;
+if(isset($_SESSION["loggedin"])) {
+    if ($_SESSION["loggedin"] == true) {
+        header("Location: http://localhost/admin/admin.php");
+    }
+} else {
+    $_SESSION["loggedin"] = false;
+}
 
 ?>
 
@@ -58,7 +64,7 @@ $_SESSION["loggedin"] = false;
             ?>
 
         </div>
-        <button type="submit" class="btn btn-outline-dark btn-lg">Submit</button>
+        <button type="submit" class="btn btn-outline-light btn-lg">Submit</button>
     </form>
 </div>
 

@@ -17,25 +17,35 @@ if (!$conn) {
 }
 
 // Query
-$query = "SELECT password FROM management WHERE username='$usr'";
+$query = "SELECT * FROM management WHERE username='$usr' AND password='$pas'";
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) == 1) {
     $row = $result->fetch_assoc();
-    // $id = $row["employee_id"];
-    // $username = $row["username"];
+     $empid = $row["employee_id"];
     $password = $row["password"];
-    // $post = $row["post"];
+    $username = $row["username"];
+    $fname = $row["fullname"];
+    $post = $row["post"];
 
-    // Check if password matches
-    if ($pas == $password) {
-        header("Location: http://localhost/admin/admin.php");
-        $_SESSION["loggedin"] = true;
-    } else {
-        header("Location: http://localhost/login.php?err=1");
-        $_SESSION["loggedin"] = false;
-    }
+    header("Location: http://localhost/admin/admin.php");
+    $_SESSION["loggedin"] = true;
+    $_SESSION["empid"] = $empid;
+    $_SESSION["username"] = $username;
+    $_SESSION["fullname"] = $fname;
+    $_SESSION["post"] = $post;
+
+    // TOFO: Once employee management is set use password_hash() and password_verify() for storing and retrieving/checking
+//    if ($pas == $password) {
+//        header("Location: http://localhost/admin/admin.php");
+//        $_SESSION["loggedin"] = true;
+//    } else {
+//        header("Location: http://localhost/login.php?err=1");
+//        $_SESSION["loggedin"] = false;
+//    }
+
 } else {
     header("Location: http://localhost/login.php?err=1");
+    $_SESSION["loggedin"] = false;
 }
 
 // Close database connection

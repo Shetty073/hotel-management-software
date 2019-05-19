@@ -1,6 +1,8 @@
 body {
     /*background: lightsteelblue;*/
-    background: #63AEFD;
+    /*background: #63AEFD;*/
+    background: #343A40;
+    color: #FFFFFF;
 }
 
 .login-form {
@@ -26,4 +28,3 @@ body {
         font-size: 40px;
     }
 }
-
