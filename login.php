@@ -10,11 +10,12 @@ $_SESSION["loggedin"] = false;
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hotel Management System</title>
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/login.css">
+    <meta name="author" content="Ashish Shetty">
+    <link rel="stylesheet" href="http://localhost/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://localhost/css/login.css">
 </head>
 <body>
 <h1 class="display-1 login-brand" style="text-align:center;">Sierra Hotels</h1>
@@ -47,6 +48,13 @@ $_SESSION["loggedin"] = false;
                 echo "<div class='alert alert-danger alert-dismissible fade show col-sm-4' style='padding: 4px; font-size: 14px;'><button type='button' class='close' data-dismiss='alert' style='padding: 0px;'>&times;</button><strong>Error: </strong>$errors[$error_id]</div>";
             }
 
+            // User logged out alert
+            if (isset($_GET["logout"])) {
+                if ((int)$_GET["logout"] == 1) {
+                    echo "<div class='alert alert-success alert-dismissible fade show col-sm-4' style='padding: 4px; font-size: 14px;'><button type='button' class='close' data-dismiss='alert' style='padding: 0px;'>&times;</button>Logged out successfully</div>";
+                }
+            }
+
             ?>
 
         </div>
@@ -54,8 +62,8 @@ $_SESSION["loggedin"] = false;
     </form>
 </div>
 
-<script src="./js/jquery-3.3.1.slim.min.js"></script>
-<script src="./js/popper.min.js"></script>
-<script src="./js/bootstrap.min.js"></script>
+<script src="http://localhost/js/jquery-3.3.1.slim.min.js"></script>
+<script src="http://localhost/js/popper.min.js"></script>
+<script src="http://localhost/js/bootstrap.min.js"></script>
 </body>
 </html>

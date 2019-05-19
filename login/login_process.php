@@ -13,6 +13,7 @@ $conn = mysqli_connect("localhost", "root", "", "administration");
 if (!$conn) {
 //    die("Error! could not connect to database".mysqli_error($conn));
     header("Location: http://localhost/login.php?err=2");
+    die();
 }
 
 // Query
