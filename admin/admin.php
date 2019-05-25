@@ -97,6 +97,11 @@ if ($_SESSION["loggedin"] == false) {
         .sidebar-heading {
             color: black !important;
         }
+
+        .btn-outline-light:hover {
+            border-color: #6C757D !important;
+            color: #6C757D !important;
+        }
     </style>
 </head>
 <body>
@@ -267,7 +272,7 @@ if ($_SESSION["loggedin"] == false) {
 
                         ?>
                     </p>
-                    <a class="btn btn-outline-light" href="#">Bookings</a>
+                    <a class="btn btn-outline-light" href="http://localhost\admin\roombooking\newbooking.php">New Booking</a>
                 </div>
             </div>
         </main>

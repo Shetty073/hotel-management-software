@@ -97,6 +97,21 @@ if ($_SESSION["loggedin"] == false) {
         .sidebar-heading {
             color: black !important;
         }
+
+        .table-secondary {
+            background-color: #697179;
+            color: white;
+        }
+
+        table tbody tr:hover {
+            background-color: #6C757D !important;
+            color: white !important;
+        }
+
+        .btn-outline-light:hover {
+            border-color: #6C757D !important;
+            color: #6C757D !important;
+        }
     </style>
 </head>
 <body>
@@ -200,18 +215,38 @@ if ($_SESSION["loggedin"] == false) {
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Reservation</h1>
-<!--                <div class="btn-toolbar mb-2 mb-md-0">-->
-<!--                    <div class="btn-group mr-2">-->
-<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>-->
-<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>-->
-<!--                    </div>-->
-<!--                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">-->
-<!--                        <span data-feather="calendar"></span>-->
-<!--                        This week-->
-<!--                    </button>-->
-<!--                </div>-->
             </div>
-
+            <p><a class="btn btn-outline-secondary" href="http://localhost\admin\roombooking\newbooking.php">New Booking</a></p>
+            <table class="table table-hover table-secondary">
+                <thead>
+                <tr>
+                    <th scope="col">Suite #</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Check-out</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td scope="row">1</td>
+                    <td>CustomerName</td>
+                    <td>Date</td>
+                    <td><a class="btn btn-outline-light">Services</a></td>
+                </tr>
+                <tr>
+                    <td scope="row">2</td>
+                    <td>CustomerName</td>
+                    <td>Date</td>
+                    <td><a class="btn btn-outline-light">Services</a></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>CustomerName</td>
+                    <td>Date</td>
+                    <td><a class="btn btn-outline-light">Services</a></td>
+                </tr>
+                </tbody>
+            </table>
         </main>
     </div>
 </div>

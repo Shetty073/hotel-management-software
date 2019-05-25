@@ -115,42 +115,42 @@ if ($_SESSION["loggedin"] == false) {
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            <span><img class="iconic active" src="http://localhost/css/open-iconic/svg/dashboard.svg"
+                        <a class="nav-link" href="http://localhost/admin/admin.php">
+                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/dashboard.svg"
                                        alt="dashboard"></span>
                             Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/calendar.svg"
+                        <a class="nav-link active" href="http://localhost/admin/reservation.php">
+                            <span><img class="iconic active" src="http://localhost/css/open-iconic/svg/calendar.svg"
                                        alt="reservation"></span>
                             Reservation
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="http://localhost/admin/restaurant.php">
                             <span><img class="iconic" src="http://localhost/css/open-iconic/svg/restaurant.svg"
                                        alt="restaurant"></span>
                             Restaurants
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="http://localhost/admin/services.php">
                             <span><img class="iconic" src="http://localhost/css/open-iconic/svg/services.svg"
                                        alt="services"></span>
                             Services
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="http://localhost/admin/reports.php">
                             <span><img class="iconic" src="http://localhost/css/open-iconic/svg/document.svg"
                                        alt="reposrts"></span>
                             Reports
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="http://localhost/admin/expenses.php">
                             <span><img class="iconic" src="http://localhost/css/open-iconic/svg/expenses.svg"
                                        alt="expenses"></span>
                             Expenses
