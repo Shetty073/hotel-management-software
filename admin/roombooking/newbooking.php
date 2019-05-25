@@ -22,7 +22,7 @@ if ($_SESSION["loggedin"] == false) {
     <title>Admin:New Booking - Sierra Hotels</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="http://localhost/css/intl-tel-input/css/intlTelInput.css">
+    <link rel="stylesheet" href="http://localhost/external/intl-tel-input/css/intlTelInput.css">
     <link href="http://localhost/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .bd-placeholder-img {
@@ -97,8 +97,6 @@ if ($_SESSION["loggedin"] == false) {
             color: black !important;
         }
 
-        .iti-flag {background-image: url("http://localhost/css/intl-tel-input/img/flags.png");}
-
         .btn-outline-warning:hover {
             color: white;
         }
@@ -109,8 +107,16 @@ if ($_SESSION["loggedin"] == false) {
             text-decoration-color: #969fa7;
         }
 
+
+        /* Styles required for the intl-tel-input flags to be visible */
+        .iti-flag {
+            background-image: url("http://localhost/external/intl-tel-input/img/flags.png");
+        }
+
         @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-            .iti-flag {background-image: url("http://localhost/css/intl-tel-input/img/flags@2x.png");}
+            .iti-flag {
+                background-image: url("http://localhost/external/intl-tel-input/img/flags@2x.png");
+            }
         }
     </style>
 </head>
@@ -119,7 +125,7 @@ if ($_SESSION["loggedin"] == false) {
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Sierra Hotels</a>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Log out</a>
+            <a class="nav-link" href="http://localhost/login/logout_process.php">Log out</a>
         </li>
     </ul>
 </nav>
@@ -215,73 +221,73 @@ if ($_SESSION["loggedin"] == false) {
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Suite booking</h1>
-<!--                <div class="btn-toolbar mb-2 mb-md-0">-->
-<!--                    <div class="btn-group mr-2">-->
-<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>-->
-<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>-->
-<!--                    </div>-->
-<!--                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">-->
-<!--                        <span data-feather="calendar"></span>-->
-<!--                        This week-->
-<!--                    </button>-->
-<!--                </div>-->
             </div>
+            <p>
+                <a class="btn btn-outline-secondary" href="http://localhost/admin/reservation.php">< Back</a>
+            </p>
             <p class="dull-underline">Enter customer details: </p>
             <p>
             <form name="newbooking" method="post" action="./process_newbooking.php">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputFirstName">First name</label>
-                        <input type="text" class="form-control" id="inputFirstName" placeholder="Firstname" name="customerfirstname" required>
+                        <input type="text" class="form-control" id="inputFirstName" placeholder="Firstname"
+                               name="customerfirstname" required>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputLastName">Last name</label>
-                        <input type="text" class="form-control" id="inputLastName" placeholder="Lastname" name="customerlastname" required>
+                        <input type="text" class="form-control" id="inputLastName" placeholder="Lastname"
+                               name="customerlastname" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-10">
                         <label for="inputEmail4">Email</label>
-                        <input type="email" class="form-control" id="inputEmail4" placeholder="example@example.com" name="customeremail" required>
+                        <input type="email" class="form-control" id="inputEmail4" placeholder="example@example.com"
+                               name="customeremail" required>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="inputPhone">Phone no.</label><br>
                         <input type="tel" class="form-control" id="inputPhone" name="customertel" required>
-                    <!-- International Telephone Input using: https://github.com/jackocnr/intl-tel-input -->
-                        <script src="http://localhost/css/intl-tel-input/js/intlTelInput.js"></script>
+                        <!-- International Telephone Input using: https://github.com/jackocnr/intl-tel-input -->
+                        <script src="http://localhost/external/intl-tel-input/js/intlTelInput.js"></script>
                         <script>
                             var input = document.querySelector("#inputPhone");
                             window.intlTelInput(input, {
                                 // Default the country to India
                                 initialCountry: "IN",
-                                utilsScript: "http://localhost/css/intl-tel-input/js/utils.js"
+                                utilsScript: "http://localhost/external/intl-tel-input/js/utils.js"
                             });
                         </script>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputAddress">Address</label>
-                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" name="customeraddress" required>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St"
+                           name="customeraddress" required>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="countryId">Country</label>
-                        <input type="text" class="form-control" id="countryId" placeholder="Country" name="customercountry" required>
+                        <input type="text" class="form-control" id="countryId" placeholder="Country"
+                               name="customercountry" required>
 
                     </div>
                     <div class="form-group col-md-4">
                         <label for="stateId">State</label>
-                        <input type="text" class="form-control" id="stateId" placeholder="State" name="customerstate" required>
+                        <input type="text" class="form-control" id="stateId" placeholder="State" name="customerstate"
+                               required>
 
                     </div>
                     <div class="form-group col-md-2">
                         <label for="cityId">City</label>
-                        <input type="text" class="form-control" id="cityId" placeholder="City" name="customercity" required>
+                        <input type="text" class="form-control" id="cityId" placeholder="City" name="customercity"
+                               required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-3">
-                        <label for="roomType">Room type</label>
+                        <label for="roomType">Suite type</label>
                         <select id="roomType" name="roomtype" class="form-control" required>
                             <option value="Sierra Cozy" selected>Sierra Cozy</option>
                             <option value="Sierra Cozy XL">Sierra Cozy XL</option>
@@ -299,13 +305,13 @@ if ($_SESSION["loggedin"] == false) {
                         <input type="date" class="form-control" id="toDate" name="toDate" required>
                     </div>
                     <div class="form-group col-md-3">
-                        <div class="form-check">
-                            <br><br>
-                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                            <label class="form-check-label" for="defaultCheck1">
-                                is with family
-                            </label>
-                        </div>
+                        <label for="numofguests">No. of guests</label>
+                        <select id="roomType" name="numofguests" class="form-control" required>
+                            <option value="1" selected>1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-row">
@@ -314,7 +320,7 @@ if ($_SESSION["loggedin"] == false) {
                     // Login error data
                     $errors = array(
                         1 => "Database connectivity error",
-                        2 => "Database connectivity error"
+                        2 => "Suite type unavailable"
                     );
 
                     // Check if error has occurred i.e. if user was redirected to this page by the process_newbooking after encountering some error
@@ -323,6 +329,15 @@ if ($_SESSION["loggedin"] == false) {
                         echo "<div class='col-md-5'></div>";
                         echo "<div class='alert alert-danger alert-dismissible fade show col-md-2' style='padding: 4px; font-size: 14px;'><button type='button' class='close' data-dismiss='alert' style='padding: 0px;'>&times;</button><strong>Error: </strong>$errors[$error_id]</div>";
                         echo "<div class='col-md-5'></div>";
+                    }
+
+                    // Alert user of successful booking of the suite
+                    if (isset($_GET["success"])) {
+                        if ((int)$_GET["success"] == 1) {
+                            echo "<div class='col-md-5'></div>";
+                            echo "<div class='alert alert-success alert-dismissible fade show col-md-2' style='padding: 4px; font-size: 14px;'><button type='button' class='close' data-dismiss='alert' style='padding: 0px;'>&times;</button>Suite successfully booked</div>";
+                            echo "<div class='col-md-5'></div>";
+                        }
                     }
 
                     ?>
@@ -354,9 +369,9 @@ if ($_SESSION["loggedin"] == false) {
 <script>
     var today = new Date();
     var dd = ("0" + (today.getDate())).slice(-2);
-    var mm = ("0" + (today.getMonth() +　1)).slice(-2);
+    var mm = ("0" + (today.getMonth() + 1)).slice(-2);
     var yyyy = today.getFullYear();
-    today = yyyy + '-' + mm + '-' + dd ;
+    today = yyyy + '-' + mm + '-' + dd;
     $("#fromDate").attr("value", today);
 </script>
 </body>

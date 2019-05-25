@@ -216,35 +216,53 @@ if ($_SESSION["loggedin"] == false) {
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Reservation</h1>
             </div>
-            <p><a class="btn btn-outline-secondary" href="http://localhost\admin\roombooking\newbooking.php">New Booking</a></p>
+            <p>
+                <a class="btn btn-outline-secondary" href="http://localhost\admin\roombooking\newbooking.php">New
+                    Booking</a>
+            </p>
             <table class="table table-hover table-secondary">
                 <thead>
                 <tr>
                     <th scope="col">Suite #</th>
                     <th scope="col">Name</th>
                     <th scope="col">Check-out</th>
+                    <th scope="col">Details</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td scope="row">1</td>
-                    <td>CustomerName</td>
-                    <td>Date</td>
-                    <td><a class="btn btn-outline-light">Services</a></td>
-                </tr>
-                <tr>
-                    <td scope="row">2</td>
-                    <td>CustomerName</td>
-                    <td>Date</td>
-                    <td><a class="btn btn-outline-light">Services</a></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>CustomerName</td>
-                    <td>Date</td>
-                    <td><a class="btn btn-outline-light">Services</a></td>
-                </tr>
+                <?php
+
+                // Database connection
+                $conn = mysqli_connect("localhost", "root", "", "rooms");
+
+                if (!$conn) {
+                    //    die("Error! could not connect to database".mysqli_error($conn));
+                    echo "<div class='alert alert-danger alert-dismissible fade show col-md-12' style='padding: 4px; font-size: 14px;'><button type='button' class='close' data-dismiss='alert' style='padding: 0px;'>&times;</button>Database connection error</div>";
+                    die();
+                }
+
+                $query = "SELECT * FROM suites WHERE checked_in=1";
+                $result = mysqli_query($conn, $query);
+                if (mysqli_num_rows($result) >= 1) {
+                    while ($row = mysqli_fetch_array($result)) {
+                        $suite_no = $row['room_no'];
+                        $name = $row['fname'] . " " . $row['lname'];
+
+                        // MariaDB SQL stores date type data in the format yyyy-mm-dd
+                        // Change its format to dd-mm-yyy before displaying it
+                        $checkout_date = date("d-m-Y", strtotime($row['booked_to']));
+                        echo "<tr>";
+                        echo "<td scope=\"row\">$suite_no</td>";
+                        echo "<td>$name</td>";
+                        echo "<td>$checkout_date</td>";
+                        echo "<td><a class=\"btn btn-outline-light\" href=\"http://localhost/admin/reservationdetails/reservationdetails.php?det=$suite_no\">Details</a></td>";
+                        echo "<td><a class=\"btn btn-outline-light\" href=\"#\">Services</a></td>";
+                        echo "</tr>";
+                    }
+                }
+
+                ?>
                 </tbody>
             </table>
         </main>

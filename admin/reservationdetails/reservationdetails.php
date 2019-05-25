@@ -97,6 +97,25 @@ if ($_SESSION["loggedin"] == false) {
         .sidebar-heading {
             color: black !important;
         }
+
+        .table-secondary {
+            background-color: #697179;
+            color: white;
+        }
+
+        table tbody tr:hover {
+            background-color: #6C757D !important;
+            color: white !important;
+        }
+
+        .btn-outline-light:hover {
+            border-color: #6C757D !important;
+            color: #6C757D !important;
+        }
+
+        th {
+            width: 200px;
+        }
     </style>
 </head>
 <body>
@@ -199,19 +218,95 @@ if ($_SESSION["loggedin"] == false) {
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Dashboard</h1>
+                <h1 class="h2">Guest details for suite no.: <?php $s_no = $_GET['det'];
+                    echo "$s_no" ?></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                        <a type="button" class="btn btn-sm btn-outline-secondary" href="#">Export</a>
                     </div>
-                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                        <span data-feather="calendar"></span>
-                        This week
-                    </button>
                 </div>
             </div>
+            <p>
+                <a class="btn btn-outline-secondary" href="http://localhost/admin/reservation.php">< Back</a>
+            </p>
+            <table class="table table-bordered table-secondary">
+                <tbody>
+                <?php
 
+                // Database connection
+                $conn = mysqli_connect("localhost", "root", "", "rooms");
+
+                if (!$conn) {
+                    //    die("Error! could not connect to database".mysqli_error($conn));
+                    echo "<div class='alert alert-danger alert-dismissible fade show col-md-12' style='padding: 4px; font-size: 14px;'><button type='button' class='close' data-dismiss='alert' style='padding: 0px;'>&times;</button><strong>Error: </strong>Unable to connect to database!</div>";
+                    die();
+                }
+
+                $g_suite_no = $_GET["det"];
+
+                // Query
+                $query = "SELECT * FROM suites WHERE room_no=$g_suite_no";
+
+                // result of the query
+                $result = mysqli_query($conn, $query);
+
+                // get the data from the result
+                if (mysqli_num_rows($result) == 1) {
+                    $row = $result->fetch_assoc();
+                    $room_id = $row["room_id"];
+                    $room_no = $row["room_no"];
+                    $fname = $row["fname"];
+                    $lname = $row["lname"];
+                    $email = $row["email"];
+                    $phone = $row["phone"];
+                    $address = $row["address"];
+                    $country = $row["country"];
+                    $state = $row["state"];
+                    $city = $row["city"];
+                    $no_of_guests = $row["no_of_guests"];
+                    $booked_from = $row["booked_from"];
+                    $booked_to = $row["booked_to"];
+                    $room_services = $row["room_services"];
+                    $room_type = $row["room_type"];
+                }
+
+                // Display the data
+                echo "<tr>";
+                echo "<th>First Name:</th><td colspan='3'>$fname</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<th>Last Name:</th><td colspan='3'>$lname</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<th>Email:</th><td colspan='3'>$email</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<th>Phone:</th><td colspan='3'>$phone</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<th>Address:</th><td colspan='3'>$address</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<th>City:</th><td colspan='3'>$city</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<th>State:</th><td colspan='3'>$state</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<th>Country:</th><td colspan='3'>$country</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<th>Check In:</th><td>$booked_from</td>";
+                echo "<th>Check Out:</th><td>$booked_to</td>";
+                echo "</tr>";
+                echo "<tr>";
+                echo "<th>Room ID:</th><td>$room_id</td>";
+                echo "<th>Room Type</th><td>$room_type</td>";
+                echo "</tr>";
+
+                ?>
+                </tbody>
+            </table>
         </main>
     </div>
 </div>

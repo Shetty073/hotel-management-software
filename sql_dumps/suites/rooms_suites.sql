@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS rooms;
 USE rooms;
-CREATE TABLE IF NOT EXISTS suites(room_id int not null primary key auto_increment, room_no int not null, checked_in bit not null, booked_from datetime, booked_to datetime, room_services varchar(256), under_maintainance bit not null, room_type varchar(64) not null);
+CREATE TABLE IF NOT EXISTS suites(room_id int not null primary key auto_increment, room_no int not null, checked_in bit not null, fname varchar(32), lname varchar(32), email varchar(128), phone varchar(24), address text, country varchar(128), state varchar(128), city varchar(128), no_of_guests int(1), booked_from date, booked_to date, room_services varchar(256), under_maintainance bit not null, room_type varchar(64) not null);
 INSERT INTO suites
 (room_no, checked_in, room_services, under_maintainance, room_type)
 VALUES
