@@ -26,21 +26,6 @@ if ($_SESSION["loggedin"] == false) {
 
 
     <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
         .dboard {
             padding-top: 45px;
         }
@@ -220,7 +205,7 @@ if ($_SESSION["loggedin"] == false) {
             <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
                 <div class="card-header">Suites</div>
                 <div class="card-body">
-                    <h5 class="card-title">Available rooms</h5>
+                    <h5 class="card-title">Availability</h5>
                     <p class="card-text">
                         <?php
 

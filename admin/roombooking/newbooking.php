@@ -25,21 +25,6 @@ if ($_SESSION["loggedin"] == false) {
     <link rel="stylesheet" href="http://localhost/external/intl-tel-input/css/intlTelInput.css">
     <link href="http://localhost/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
         .dboard {
             padding-top: 45px;
         }
@@ -107,6 +92,25 @@ if ($_SESSION["loggedin"] == false) {
             text-decoration-color: #969fa7;
         }
 
+
+
+        /* Page specific styles */
+        /* Style for the bootstrap 4 tooltip */
+        .tooltip-inner {
+            background-color: #6C757D;
+        }
+        .tooltip.bs-tooltip-right .arrow:before {
+            border-bottom-color: #6C757D !important;
+        }
+        .tooltip.bs-tooltip-left .arrow:before {
+            border-bottom-color: #6C757D !important;
+        }
+        .tooltip.bs-tooltip-bottom .arrow:before {
+            border-bottom-color: #6C757D !important;
+        }
+        .tooltip.bs-tooltip-top .arrow:before {
+            border-bottom-color: #6C757D !important;
+        }
 
         /* Styles required for the intl-tel-input flags to be visible */
         .iti-flag {
@@ -306,7 +310,7 @@ if ($_SESSION["loggedin"] == false) {
                     </div>
                     <div class="form-group col-md-3">
                         <label for="numofguests">No. of guests</label>
-                        <select id="roomType" name="numofguests" class="form-control" required>
+                        <select id="numofguests" name="numofguests" class="form-control" required>
                             <option value="1" selected>1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
@@ -374,5 +378,11 @@ if ($_SESSION["loggedin"] == false) {
     today = yyyy + '-' + mm + '-' + dd;
     $("#fromDate").attr("value", today);
 </script>
+
+<!-- This is for the Popover message for no. of guest limit (<select>) -->
+<script>
+    $('#numofguests').tooltip({title: "<b>Guest limit: 4 per suite</b><br>This limit is non-negotiable.", html: true, placement: "bottom", animation: true});
+</script>
+
 </body>
 </html>

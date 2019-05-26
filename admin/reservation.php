@@ -26,21 +26,6 @@ if ($_SESSION["loggedin"] == false) {
 
 
     <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-
         .dboard {
             padding-top: 45px;
         }
@@ -111,6 +96,12 @@ if ($_SESSION["loggedin"] == false) {
         .btn-outline-light:hover {
             border-color: #6C757D !important;
             color: #6C757D !important;
+        }
+
+        .check-out-btn:hover, .check-out-btn:active:focus {
+            border-color: white !important;
+            background-color: red !important;
+            color: white !important;
         }
     </style>
 </head>
@@ -225,9 +216,10 @@ if ($_SESSION["loggedin"] == false) {
                 <tr>
                     <th scope="col">Suite #</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Check-out</th>
+                    <th scope="col">Checkout Date</th>
                     <th scope="col">Details</th>
-                    <th scope="col"></th>
+                    <th scope="col">Services</th>
+                    <th scope="col">Checkout</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -256,8 +248,9 @@ if ($_SESSION["loggedin"] == false) {
                         echo "<td scope=\"row\">$suite_no</td>";
                         echo "<td>$name</td>";
                         echo "<td>$checkout_date</td>";
-                        echo "<td><a class=\"btn btn-outline-light\" href=\"http://localhost/admin/reservationdetails/reservationdetails.php?det=$suite_no\">Details</a></td>";
+                        echo "<td><a class=\"btn btn-outline-light\" href=\"http://localhost/admin/roombooking/reservationdetails.php?det=$suite_no\">Details</a></td>";
                         echo "<td><a class=\"btn btn-outline-light\" href=\"#\">Services</a></td>";
+                        echo "<td><a class=\"btn btn-outline-light check-out-btn\" href=\"#\">Checkout</a></td>";
                         echo "</tr>";
                     }
                 }
