@@ -6,7 +6,7 @@ session_start();
 // If this page was accessed through URL directly then access must be dened and user must be brought back to
 // the login page, else user stays on this page.
 if ($_SESSION["loggedin"] == false) {
-    header("Location: http://localhost/login.php");
+    header("Location: http://$_SERVER[HTTP_HOST]/login.php");
 }
 
 ?>
@@ -22,7 +22,7 @@ if ($_SESSION["loggedin"] == false) {
     <title>Admin - Sierra Hotels</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="http://localhost/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
 
     <style>
@@ -95,7 +95,7 @@ if ($_SESSION["loggedin"] == false) {
 
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="http://localhost/login/logout_process.php">Log out</a>
+            <a class="nav-link" href="../login/logout_process.php">Log out</a>
         </li>
     </ul>
 </nav>
@@ -107,42 +107,42 @@ if ($_SESSION["loggedin"] == false) {
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link active" href="#">
-                            <span><img class="iconic active" src="http://localhost/css/open-iconic/svg/dashboard.svg"
+                            <span><img class="iconic active" src="../css/open-iconic/svg/dashboard.svg"
                                        alt="dashboard"></span>
                             Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/admin/reservation.php">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/calendar.svg"
+                        <a class="nav-link" href="../admin/reservation.php">
+                            <span><img class="iconic" src="../css/open-iconic/svg/calendar.svg"
                                        alt="reservation"></span>
                             Reservation
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/admin/restaurant.php">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/restaurant.svg"
+                        <a class="nav-link" href="../admin/restaurant.php">
+                            <span><img class="iconic" src="../css/open-iconic/svg/restaurant.svg"
                                        alt="restaurant"></span>
                             Restaurants
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/admin/services.php">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/services.svg"
+                        <a class="nav-link" href="../admin/services.php">
+                            <span><img class="iconic" src="../css/open-iconic/svg/services.svg"
                                        alt="services"></span>
                             Services
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/admin/reports.php">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/document.svg"
+                        <a class="nav-link" href="../admin/reports.php">
+                            <span><img class="iconic" src="../css/open-iconic/svg/document.svg"
                                        alt="reposrts"></span>
                             Reports
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/admin/expenses.php">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/expenses.svg"
+                        <a class="nav-link" href="../admin/expenses.php">
+                            <span><img class="iconic" src="../css/open-iconic/svg/expenses.svg"
                                        alt="expenses"></span>
                             Expenses
                         </a>
@@ -158,28 +158,28 @@ if ($_SESSION["loggedin"] == false) {
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
                         <a class="nav-link management-nav" href="#">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/employees.svg"
+                            <span><img class="iconic" src="../css/open-iconic/svg/employees.svg"
                                        alt="employees"></span>
                             Employees
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link management-nav" href="#">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/departments.svg"
+                            <span><img class="iconic" src="../css/open-iconic/svg/departments.svg"
                                        alt="departments"></span>
                             Departments
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link management-nav" href="#">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/stocks.svg"
+                            <span><img class="iconic" src="../css/open-iconic/svg/stocks.svg"
                                        alt="stocks"></span>
                             Stocks
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link management-nav" href="#">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/set-costs.svg"
+                            <span><img class="iconic" src="../css/open-iconic/svg/set-costs.svg"
                                        alt="set-costs"></span>
                             Set costs
                         </a>
@@ -191,16 +191,6 @@ if ($_SESSION["loggedin"] == false) {
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Dashboard</h1>
-<!--                <div class="btn-toolbar mb-2 mb-md-0">-->
-<!--                    <div class="btn-group mr-2">-->
-<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>-->
-<!--                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>-->
-<!--                    </div>-->
-<!--                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">-->
-<!--                        <span data-feather="calendar"></span>-->
-<!--                        This week-->
-<!--                    </button>-->
-<!--                </div>-->
             </div>
             <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
                 <div class="card-header">Suites</div>
@@ -257,16 +247,16 @@ if ($_SESSION["loggedin"] == false) {
 
                         ?>
                     </p>
-                    <a class="btn btn-outline-light" href="http://localhost\admin\roombooking\newbooking.php">New Booking</a>
+                    <a class="btn btn-outline-light" href="../admin/roombooking/newbooking.php">New Booking</a>
                 </div>
             </div>
         </main>
     </div>
 </div>
 
-<script src="http://localhost/js/jquery-3.3.1.slim.min.js"></script>
-<script src="http://localhost/js/popper.min.js"></script>
-<script src="http://localhost/js/bootstrap.min.js"></script>
+<script src="../js/jquery-3.3.1.slim.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
 
 </body>
 </html>

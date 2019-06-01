@@ -1,1 +1,1 @@
-<?php header("Location: http://localhost/login.php"); ?>
+<?php header("Location: http://$_SERVER[HTTP_HOST]/login.php");

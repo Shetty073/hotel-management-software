@@ -12,7 +12,7 @@ $conn = mysqli_connect("localhost", "root", "", "administration");
 
 if (!$conn) {
 //    die("Error! could not connect to database".mysqli_error($conn));
-    header("Location: http://localhost/login.php?err=2");
+    header("Location: http://$_SERVER[HTTP_HOST]/login.php?err=2");
     die();
 }
 
@@ -27,7 +27,7 @@ if (mysqli_num_rows($result) == 1) {
     $fname = $row["fullname"];
     $post = $row["post"];
 
-    header("Location: http://localhost/admin/admin.php");
+    header("Location: http://$_SERVER[HTTP_HOST]/admin/admin.php");
     $_SESSION["loggedin"] = true;
     $_SESSION["empid"] = $empid;
     $_SESSION["username"] = $username;
@@ -36,19 +36,17 @@ if (mysqli_num_rows($result) == 1) {
 
     // TOFO: Once employee management is set use password_hash() and password_verify() for storing and retrieving/checking
 //    if ($pas == $password) {
-//        header("Location: http://localhost/admin/admin.php");
+//        header("Location: http://$_SERVER[HTTP_HOST]/admin/admin.php");
 //        $_SESSION["loggedin"] = true;
 //    } else {
-//        header("Location: http://localhost/login.php?err=1");
+//        header("Location: http://$_SERVER[HTTP_HOST]/login.php?err=1");
 //        $_SESSION["loggedin"] = false;
 //    }
 
 } else {
-    header("Location: http://localhost/login.php?err=1");
+    header("Location: http://$_SERVER[HTTP_HOST]/login.php?err=1");
     $_SESSION["loggedin"] = false;
 }
 
 // Close database connection
 mysqli_close($conn);
-
-?>

@@ -4,7 +4,7 @@
 session_start();
 if(isset($_SESSION["loggedin"])) {
     if ($_SESSION["loggedin"] == true) {
-        header("Location: http://localhost/admin/admin.php");
+        header("Location: http://$_SERVER[HTTP_HOST]/admin/admin.php");
     }
 } else {
     $_SESSION["loggedin"] = false;
@@ -20,8 +20,8 @@ if(isset($_SESSION["loggedin"])) {
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Hotel Management System</title>
     <meta name="author" content="Ashish Shetty">
-    <link rel="stylesheet" href="http://localhost/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://localhost/css/login.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 <body>
 <h1 class="display-1 login-brand" style="text-align:center;">Sierra Hotels</h1>
@@ -68,8 +68,8 @@ if(isset($_SESSION["loggedin"])) {
     </form>
 </div>
 
-<script src="http://localhost/js/jquery-3.3.1.slim.min.js"></script>
-<script src="http://localhost/js/popper.min.js"></script>
-<script src="http://localhost/js/bootstrap.min.js"></script>
+<script src="js/jquery-3.3.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>

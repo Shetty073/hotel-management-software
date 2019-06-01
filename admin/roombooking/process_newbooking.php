@@ -22,7 +22,7 @@ $conn = mysqli_connect("localhost", "root", "", "rooms");
 
 if (!$conn) {
 //    die("Error! could not connect to database".mysqli_error($conn));
-    header("Location: http://localhost/admin/roombooking/newbooking.php?err=1");
+    header("Location: http://$_SERVER[HTTP_HOST]/admin/roombooking/newbooking.php?err=1");
     die();
 }
 
@@ -34,13 +34,11 @@ if (mysqli_num_rows($result) >= 1) {
     $room_id = $row["room_id"];
     $query_insert = "UPDATE suites SET fname='$first_name', lname='$last_name', email='$c_email', phone='$c_tel', address='$c_add', country='$c_country', state='$c_state', city='$c_city', no_of_guests=$no_of_guests, booked_from='$check_in', booked_to='$check_out', checked_in=1 WHERE room_id=$room_id";
     if (mysqli_query($conn, $query_insert)) {
-        header("Location: http://localhost/admin/roombooking/newbooking.php?success=1");
+        header("Location: http://$_SERVER[HTTP_HOST]/admin/roombooking/newbooking.php?success=1");
     }
 } else {
-    header("Location: http://localhost/admin/roombooking/newbooking.php?err=2");
+    header("Location: http://$_SERVER[HTTP_HOST]/admin/roombooking/newbooking.php?err=2");
 }
 
 // Close database connection
 mysqli_close($conn);
-
-?>

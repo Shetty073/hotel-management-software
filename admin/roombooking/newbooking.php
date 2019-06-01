@@ -6,7 +6,7 @@ session_start();
 // If this page was accessed through URL directly then access must be dened and user must be brought back to
 // the login page, else user stays on this page.
 if ($_SESSION["loggedin"] == false) {
-    header("Location: http://localhost/login.php");
+    header("Location: http://$_SERVER[HTTP_HOST]/login.php");
 }
 
 ?>
@@ -22,8 +22,8 @@ if ($_SESSION["loggedin"] == false) {
     <title>Admin:New Booking - Sierra Hotels</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="http://localhost/external/intl-tel-input/css/intlTelInput.css">
-    <link href="http://localhost/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../external/intl-tel-input/css/intlTelInput.css">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
     <style>
         .dboard {
             padding-top: 45px;
@@ -114,12 +114,12 @@ if ($_SESSION["loggedin"] == false) {
 
         /* Styles required for the intl-tel-input flags to be visible */
         .iti-flag {
-            background-image: url("http://localhost/external/intl-tel-input/img/flags.png");
+            background-image: url("../../external/intl-tel-input/img/flags.png");
         }
 
         @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
             .iti-flag {
-                background-image: url("http://localhost/external/intl-tel-input/img/flags@2x.png");
+                background-image: url("../../external/intl-tel-input/img/flags@2x.png");
             }
         }
     </style>
@@ -129,7 +129,7 @@ if ($_SESSION["loggedin"] == false) {
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Sierra Hotels</a>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="http://localhost/login/logout_process.php">Log out</a>
+            <a class="nav-link" href="../../login/logout_process.php">Log out</a>
         </li>
     </ul>
 </nav>
@@ -140,43 +140,43 @@ if ($_SESSION["loggedin"] == false) {
             <div class="sidebar-sticky">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/admin/admin.php">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/dashboard.svg"
+                        <a class="nav-link" href="../../admin/admin.php">
+                            <span><img class="iconic" src="../../css/open-iconic/svg/dashboard.svg"
                                        alt="dashboard"></span>
                             Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="http://localhost/admin/reservation.php">
-                            <span><img class="iconic active" src="http://localhost/css/open-iconic/svg/calendar.svg"
+                        <a class="nav-link active" href="../../admin/reservation.php">
+                            <span><img class="iconic active" src="../../css/open-iconic/svg/calendar.svg"
                                        alt="reservation"></span>
                             Reservation
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/admin/restaurant.php">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/restaurant.svg"
+                        <a class="nav-link" href="../../admin/restaurant.php">
+                            <span><img class="iconic" src="../../css/open-iconic/svg/restaurant.svg"
                                        alt="restaurant"></span>
                             Restaurants
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/admin/services.php">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/services.svg"
+                        <a class="nav-link" href="../../admin/services.php">
+                            <span><img class="iconic" src="../../css/open-iconic/svg/services.svg"
                                        alt="services"></span>
                             Services
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/admin/reports.php">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/document.svg"
+                        <a class="nav-link" href="../../admin/reports.php">
+                            <span><img class="iconic" src="../../css/open-iconic/svg/document.svg"
                                        alt="reposrts"></span>
                             Reports
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost/admin/expenses.php">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/expenses.svg"
+                        <a class="nav-link" href="../../admin/expenses.php">
+                            <span><img class="iconic" src="../../css/open-iconic/svg/expenses.svg"
                                        alt="expenses"></span>
                             Expenses
                         </a>
@@ -192,28 +192,28 @@ if ($_SESSION["loggedin"] == false) {
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
                         <a class="nav-link management-nav" href="#">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/employees.svg"
+                            <span><img class="iconic" src="../../css/open-iconic/svg/employees.svg"
                                        alt="employees"></span>
                             Employees
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link management-nav" href="#">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/departments.svg"
+                            <span><img class="iconic" src="../../css/open-iconic/svg/departments.svg"
                                        alt="departments"></span>
                             Departments
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link management-nav" href="#">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/stocks.svg"
+                            <span><img class="iconic" src="../../css/open-iconic/svg/stocks.svg"
                                        alt="stocks"></span>
                             Stocks
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link management-nav" href="#">
-                            <span><img class="iconic" src="http://localhost/css/open-iconic/svg/set-costs.svg"
+                            <span><img class="iconic" src="../../css/open-iconic/svg/set-costs.svg"
                                        alt="set-costs"></span>
                             Set costs
                         </a>
@@ -227,7 +227,7 @@ if ($_SESSION["loggedin"] == false) {
                 <h1 class="h2">Suite booking</h1>
             </div>
             <p>
-                <a class="btn btn-outline-secondary" href="http://localhost/admin/reservation.php">< Back</a>
+                <a class="btn btn-outline-secondary" href="../../admin/reservation.php">< Back</a>
             </p>
             <p class="dull-underline">Enter customer details: </p>
             <p>
@@ -254,13 +254,13 @@ if ($_SESSION["loggedin"] == false) {
                         <label for="inputPhone">Phone no.</label><br>
                         <input type="tel" class="form-control" id="inputPhone" name="customertel" required>
                         <!-- International Telephone Input using: https://github.com/jackocnr/intl-tel-input -->
-                        <script src="http://localhost/external/intl-tel-input/js/intlTelInput.js"></script>
+                        <script src="../../external/intl-tel-input/js/intlTelInput.js"></script>
                         <script>
                             var input = document.querySelector("#inputPhone");
                             window.intlTelInput(input, {
                                 // Default the country to India
                                 initialCountry: "IN",
-                                utilsScript: "http://localhost/external/intl-tel-input/js/utils.js"
+                                utilsScript: "../../external/intl-tel-input/js/utils.js"
                             });
                         </script>
                     </div>
@@ -365,9 +365,9 @@ if ($_SESSION["loggedin"] == false) {
 </div>
 
 
-<script src="http://localhost/js/jquery-3.3.1.slim.min.js"></script>
-<script src="http://localhost/js/popper.min.js"></script>
-<script src="http://localhost/js/bootstrap.min.js"></script>
+<script src="../../js/jquery-3.3.1.slim.min.js"></script>
+<script src="../../js/popper.min.js"></script>
+<script src="../../js/bootstrap.min.js"></script>
 
 <!-- This will fill the #fromDate field with today's date -->
 <script>
