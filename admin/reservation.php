@@ -225,8 +225,11 @@ if ($_SESSION["loggedin"] == false) {
                 <tbody>
                 <?php
 
+                // Include the database variables file
+                include_once "../include/db_var.php";
+
                 // Database connection
-                $conn = mysqli_connect("localhost", "root", "", "rooms");
+                $conn = mysqli_connect($db_host, $db_user, $db_pass, "rooms");
 
                 if (!$conn) {
                     //    die("Error! could not connect to database".mysqli_error($conn));
@@ -247,8 +250,8 @@ if ($_SESSION["loggedin"] == false) {
                         echo "<tr>";
                         echo "<td scope=\"row\">$suite_no</td>";
                         echo "<td>$name</td>";
-                        echo "<td>$checkout_date</td>";
-                        echo "<td><a class=\"btn btn-outline-light\" href=\"../admin/roombooking/reservationdetails.php?det=$suite_no\">Details</a></td>";
+                        echo "<td><a class=\"btn btn-outline-light\" href=\"http://$_SERVER[HTTP_HOST]/admin/roombooking/update_checkout_date.php?stno=$suite_no&dat=$checkout_date\">$checkout_date</a></td>";
+                        echo "<td><a class=\"btn btn-outline-light\" href=\"http://$_SERVER[HTTP_HOST]/admin/roombooking/reservationdetails.php?det=$suite_no\">Details</a></td>";
                         echo "<td><a class=\"btn btn-outline-light\" href=\"#\">Services</a></td>";
                         echo "<td><a class=\"btn btn-outline-light check-out-btn\" href=\"#\">Checkout</a></td>";
                         echo "</tr>";

@@ -3,7 +3,7 @@
 // Session start
 session_start();
 // Check if this page was accessed through URL directly or through the login process
-// If this page was accessed through URL directly then access must be dened and user must be brought back to
+// If this page was accessed through URL directly then access must be denied and user must be brought back to
 // the login page, else user stays on this page.
 if ($_SESSION["loggedin"] == false) {
     header("Location: http://$_SERVER[HTTP_HOST]/login.php");
@@ -199,8 +199,11 @@ if ($_SESSION["loggedin"] == false) {
                     <p class="card-text">
                         <?php
 
-                        // Connect to the "rooms" database
-                        $conn = mysqli_connect("localhost", "root", "", "rooms");
+                        // Include the database variables file
+                        include_once "../include/db_var.php";
+
+                        // Database connection
+                        $conn = mysqli_connect($db_host, $db_user, $db_pass, "rooms");
 
                         // If databse connection fails display an error
                         if (!$conn) {

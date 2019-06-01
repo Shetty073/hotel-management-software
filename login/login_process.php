@@ -7,8 +7,11 @@ session_start();
 $usr = $_POST["username"];
 $pas = $_POST["password"];
 
+// Include the database variables file
+include_once "../include/db_var.php";
+
 // Database connection
-$conn = mysqli_connect("localhost", "root", "", "administration");
+$conn = mysqli_connect($db_host, $db_user, $db_pass, "administration");
 
 if (!$conn) {
 //    die("Error! could not connect to database".mysqli_error($conn));
@@ -21,7 +24,7 @@ $query = "SELECT * FROM management WHERE username='$usr' AND password='$pas'";
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) == 1) {
     $row = $result->fetch_assoc();
-     $empid = $row["employee_id"];
+    $empid = $row["employee_id"];
     $password = $row["password"];
     $username = $row["username"];
     $fname = $row["fullname"];
@@ -33,16 +36,6 @@ if (mysqli_num_rows($result) == 1) {
     $_SESSION["username"] = $username;
     $_SESSION["fullname"] = $fname;
     $_SESSION["post"] = $post;
-
-    // TOFO: Once employee management is set use password_hash() and password_verify() for storing and retrieving/checking
-//    if ($pas == $password) {
-//        header("Location: http://$_SERVER[HTTP_HOST]/admin/admin.php");
-//        $_SESSION["loggedin"] = true;
-//    } else {
-//        header("Location: http://$_SERVER[HTTP_HOST]/login.php?err=1");
-//        $_SESSION["loggedin"] = false;
-//    }
-
 } else {
     header("Location: http://$_SERVER[HTTP_HOST]/login.php?err=1");
     $_SESSION["loggedin"] = false;

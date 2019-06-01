@@ -1,3 +1,5 @@
+<!-- THIS IS A TEMPLATE FILE FOR ALL ADMINISTRATIVE PAGES -->
+
 <?php
 
 // Session start
@@ -19,7 +21,7 @@ if ($_SESSION["loggedin"] == false) {
     <meta name="description" content="">
     <meta name="author" content="Ashish Shetty">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Admin - Sierra Hotels</title>
+    <title>Admin:Update Checkout Date - Sierra Hotels</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -81,25 +83,6 @@ if ($_SESSION["loggedin"] == false) {
 
         .sidebar-heading {
             color: black !important;
-        }
-
-        .table-secondary {
-            background-color: #697179;
-            color: white;
-        }
-
-        table tbody tr:hover {
-            background-color: #6C757D !important;
-            color: white !important;
-        }
-
-        .btn-outline-light:hover {
-            border-color: #6C757D !important;
-            color: #6C757D !important;
-        }
-
-        th {
-            width: 200px;
         }
     </style>
 </head>
@@ -203,106 +186,54 @@ if ($_SESSION["loggedin"] == false) {
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Guest details for suite no.: <?php $s_no = $_GET['det'];
-                    echo "$s_no" ?></h1>
-                <div class="btn-toolbar mb-2 mb-md-0">
-                    <div class="btn-group mr-2">
-                        <a type="button" class="btn btn-sm btn-outline-secondary" href="#">Export</a>
-                    </div>
-                </div>
+                <h1 class="h2">Update checkout date</h1>
             </div>
             <p>
                 <a class="btn btn-outline-secondary" href="../../admin/reservation.php">< Back</a>
             </p>
-            <table class="table table-bordered table-secondary">
-                <tbody>
+            <form name="newbooking" method="post" action="">
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="suite_no">Suite no.</label>
+                        <?php
+                        if (isset($_GET['stno'])) {
+                            $stno = $_GET['stno'];
+                            $suite_no = (int)$_GET["stno"];
+                            echo "<input type='text' class='form-control' id='suite_no' name='suite_no' value='$stno' readonly disabled>";
+                        }
+                        ?>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="toDate">Old check-out date</label>
+                        <?php
+                        if (isset($_GET['dat'])) {
+                            $dat = $_GET['dat'];
+                            echo "<input type='text' class='form-control' id='toDate' name='toDate' value='$dat' readonly disabled>";
+                        }
+                        ?>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="toDate">New check-out date</label>
+                        <input type='date' class='form-control' id='toDate' name='toDate' required>
+                    </div>
+                </div>
                 <?php
+                // Display error message
+                $errors = array(
+                    1 => "Database error!"
+                );
 
-                // Include the database variables file
-                include_once "../../include/db_var.php";
+                $error_id = isset($_GET["err"]) ? (int)$_GET["err"] : 0;
 
-                // Database connection
-                $conn = mysqli_connect($db_host, $db_user, $db_pass, "rooms");
-
-                if (!$conn) {
-                    //    die("Error! could not connect to database".mysqli_error($conn));
-                    echo "<div class='alert alert-danger alert-dismissible fade show col-md-12' style='padding: 4px; font-size: 14px;'><button type='button' class='close' data-dismiss='alert' style='padding: 0px;'>&times;</button><strong>Error: </strong>Unable to connect to database!</div>";
-                    die();
+                if ($error_id != 0) {
+                    echo "<div class='alert alert-danger alert-dismissible fade show col-sm-2' style='padding: 4px; font-size: 14px;'><button type='button' class='close' data-dismiss='alert' style='padding: 0px;'>&times;</button><strong>Error: </strong>$errors[$error_id]</div>";
                 }
-
-                $g_suite_no = $_GET["det"];
-
-                // Query
-                $query = "SELECT * FROM suites WHERE room_no=$g_suite_no";
-
-                // result of the query
-                $result = mysqli_query($conn, $query);
-
-                // get the data from the result
-                if (mysqli_num_rows($result) == 1) {
-                    $row = $result->fetch_assoc();
-                    $room_id = $row["room_id"];
-                    $room_no = $row["room_no"];
-                    $fname = $row["fname"];
-                    $lname = $row["lname"];
-                    $email = $row["email"];
-                    $phone = $row["phone"];
-                    $address = $row["address"];
-                    $country = $row["country"];
-                    $state = $row["state"];
-                    $city = $row["city"];
-                    $no_of_guests = $row["no_of_guests"];
-                    $booked_from = $row["booked_from"];
-                    $booked_to = $row["booked_to"];
-                    $room_services = $row["room_services"];
-                    $room_type = $row["room_type"];
-                }
-
-                // Display the data
-                echo "<tr>";
-                echo "<th>First Name:</th><td colspan='3'>$fname</td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<th>Last Name:</th><td colspan='3'>$lname</td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<th>Email:</th><td colspan='3'>$email</td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<th>Phone:</th><td colspan='3'>$phone</td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<th>Address:</th><td colspan='3'>$address</td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<th>City:</th><td colspan='3'>$city</td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<th>State:</th><td colspan='3'>$state</td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<th>Country:</th><td colspan='3'>$country</td>";
-                echo "</tr>";
-                echo "<tr>";
-                 $y = substr($booked_from, 0,4);
-                 $m = substr($booked_from, 5,2);
-                 $d = substr($booked_from, 8, 2);
-                 $dat_from = "$d-$m-$y";
-                echo "<th>Check In:</th><td>$dat_from</td>";
-                $y = substr($booked_to, 0,4);
-                $m = substr($booked_to, 5,2);
-                $d = substr($booked_to, 8, 2);
-                $dat_from = "$d-$m-$y";
-                echo "<th>Check Out:</th><td>$dat_from</td>";
-                echo "</tr>";
-                echo "<tr>";
-                echo "<th>Room ID:</th><td>$room_id</td>";
-                echo "<th>Room Type</th><td>$room_type</td>";
-                echo "</tr>";
 
                 ?>
-                </tbody>
-            </table>
+                <button type="submit" class="btn btn-outline-secondary" name="submit-button">Update</button>
+            </form>
         </main>
     </div>
 </div>
@@ -310,6 +241,44 @@ if ($_SESSION["loggedin"] == false) {
 <script src="../../js/jquery-3.3.1.slim.min.js"></script>
 <script src="../../js/popper.min.js"></script>
 <script src="../../js/bootstrap.min.js"></script>
+
+<?php
+
+if (isset($_POST["submit-button"])) {
+
+    // New date
+    $new_check_out_date = $_POST["toDate"];
+    $suite_no = (int)$_GET["stno"];
+
+    // Include the database variables file
+    include_once "../../include/db_var.php";
+
+    // Database connection
+    $conn = mysqli_connect($db_host, $db_user, $db_pass, "rooms");
+
+    if (!$conn) {
+        header("Location: http://$_SERVER[HTTP_HOST]/admin/roombooking/update_checkout_date.php?err=1");
+        die();
+    }
+
+    $query = "SELECT * FROM suites WHERE room_no='$suite_no'";
+    $result = mysqli_query($conn, $query);
+    if ($result == 1) {
+        $row = $result->fetch_assoc();
+        $query_update = "UPDATE suites SET booked_to='$new_check_out_date' WHERE room_no='$suite_no'";
+        if (mysqli_query($conn, $query_update)) {
+            // PHP's header() is not working for some reason on this page...
+            // So instead I am using JavaScript's document.location
+            echo "<script type='text/javascript'> document.location = '../../admin/reservation.php?updated=$suite_no'; </script>";
+        } else {
+            // PHP's header() is not working for some reason on this page...
+            // So instead I am using JavaScript's document.location
+            echo "<script type='text/javascript'> document.location = '../../admin/roombooking/update_checkout_date.php?err=1'; </script>";
+        }
+    }
+}
+
+?>
 
 </body>
 </html>

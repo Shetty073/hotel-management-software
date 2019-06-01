@@ -17,8 +17,11 @@ $check_in = $_POST["fromDate"];
 $check_out = $_POST["toDate"];
 $no_of_guests = $_POST["numofguests"];
 
+// Include the database variables file
+include_once "../../include/db_var.php";
+
 // Database connection
-$conn = mysqli_connect("localhost", "root", "", "rooms");
+$conn = mysqli_connect($db_host, $db_user, $db_pass, "rooms");
 
 if (!$conn) {
 //    die("Error! could not connect to database".mysqli_error($conn));
