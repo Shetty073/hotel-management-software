@@ -9,4 +9,12 @@ A web based hotel management software.
 ![Image 05](https://i.imgur.com/MNVzDqw.png)
 ![Image 06](https://i.imgur.com/BDKD81r.png)
 
-#### 
+#### Features
+* Dashboard
+* Suite reservation system
+* Restaurant table reservation system
+* Suite services
+* Maintainance reports
+* and many more
+
+> These features may change in the future
