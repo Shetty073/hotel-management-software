@@ -234,7 +234,7 @@ if ($_SESSION["loggedin"] == false) {
                 $g_suite_no = mysqli_real_escape_string($conn, $_GET["det"]);
 
                 // Query
-                $query = "SELECT * FROM suites WHERE room_no=$g_suite_no";
+                $query = "SELECT * FROM suites WHERE room_no='$g_suite_no'";
 
                 // result of the query
                 $result = mysqli_query($conn, $query);
@@ -285,13 +285,13 @@ if ($_SESSION["loggedin"] == false) {
                 echo "<th>Country:</th><td colspan='3'>$country</td>";
                 echo "</tr>";
                 echo "<tr>";
-                 $y = substr($booked_from, 0,4);
-                 $m = substr($booked_from, 5,2);
-                 $d = substr($booked_from, 8, 2);
-                 $dat_from = "$d-$m-$y";
+                $y = substr($booked_from, 0, 4);
+                $m = substr($booked_from, 5, 2);
+                $d = substr($booked_from, 8, 2);
+                $dat_from = "$d-$m-$y";
                 echo "<th>Check In:</th><td>$dat_from</td>";
-                $y = substr($booked_to, 0,4);
-                $m = substr($booked_to, 5,2);
+                $y = substr($booked_to, 0, 4);
+                $m = substr($booked_to, 5, 2);
                 $d = substr($booked_to, 8, 2);
                 $dat_from = "$d-$m-$y";
                 echo "<th>Check Out:</th><td>$dat_from</td>";
