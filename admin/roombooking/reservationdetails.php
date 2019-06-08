@@ -230,7 +230,8 @@ if ($_SESSION["loggedin"] == false) {
                     die();
                 }
 
-                $g_suite_no = $_GET["det"];
+                // Get the suite no. from the URL
+                $g_suite_no = mysqli_real_escape_string($conn, $_GET["det"]);
 
                 // Query
                 $query = "SELECT * FROM suites WHERE room_no=$g_suite_no";

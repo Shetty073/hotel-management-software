@@ -3,19 +3,6 @@
 // Session start
 session_start();
 
-// Form data
-$first_name = $_POST["customerfirstname"];
-$last_name = $_POST["customerlastname"];
-$c_email = $_POST["customeremail"];
-$c_tel = $_POST["customertel"];
-$c_add = $_POST["customeraddress"];
-$c_country = $_POST["customercountry"];
-$c_state = $_POST["customerstate"];
-$c_city = $_POST["customercity"];
-$room_type = $_POST["roomtype"];
-$check_in = $_POST["fromDate"];
-$check_out = $_POST["toDate"];
-$no_of_guests = $_POST["numofguests"];
 
 // Include the database variables file
 include_once "../../include/db_var.php";
@@ -28,6 +15,20 @@ if (!$conn) {
     header("Location: http://$_SERVER[HTTP_HOST]/admin/roombooking/newbooking.php?err=1");
     die();
 }
+
+// Form data
+$first_name = mysqli_real_escape_string($conn, $_POST["customerfirstname"]);
+$last_name = mysqli_real_escape_string($conn, $_POST["customerlastname"]);
+$c_email = mysqli_real_escape_string($conn, $_POST["customeremail"]);
+$c_tel = mysqli_real_escape_string($conn, $_POST["customertel"]);
+$c_add = mysqli_real_escape_string($conn, $_POST["customeraddress"]);
+$c_country = mysqli_real_escape_string($conn, $_POST["customercountry"]);
+$c_state = mysqli_real_escape_string($conn, $_POST["customerstate"]);
+$c_city = mysqli_real_escape_string($conn, $_POST["customercity"]);
+$room_type = mysqli_real_escape_string($conn, $_POST["roomtype"]);
+$check_in = mysqli_real_escape_string($conn, $_POST["fromDate"]);
+$check_out = mysqli_real_escape_string($conn, $_POST["toDate"]);
+$no_of_guests = mysqli_real_escape_string($conn, $_POST["numofguests"]);
 
 // Query
 $query = "SELECT * FROM suites WHERE room_type='$room_type' AND checked_in=0 AND under_maintainance=0";

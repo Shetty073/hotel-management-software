@@ -246,21 +246,23 @@ if ($_SESSION["loggedin"] == false) {
 
 if (isset($_POST["submit-button"])) {
 
-    // New date
-    $new_check_out_date = $_POST["toDate"];
-    $suite_no = (int)$_GET["stno"];
-
     // Include the database variables file
     include_once "../../include/db_var.php";
 
     // Database connection
     $conn = mysqli_connect($db_host, $db_user, $db_pass, "rooms");
 
+    // Check for database connectivity problems
     if (!$conn) {
         header("Location: http://$_SERVER[HTTP_HOST]/admin/roombooking/update_checkout_date.php?err=1");
         die();
     }
 
+    // New date
+    $new_check_out_date = mysqli_real_escape_string($conn, $_POST["toDate"]);
+    $suite_no = (int)$_GET["stno"];
+
+    // Query
     $query = "SELECT * FROM suites WHERE room_no='$suite_no'";
     $result = mysqli_query($conn, $query);
     if ($result == 1) {
