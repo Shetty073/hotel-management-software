@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS management
     password    varchar(16)  not null,
     email       varchar(64)  not null,
     phone       varchar(24)  not null,
-    salary      float        not null,
+    salary      double       not null,
     hiring_date date         not null,
     post        text         not null
 );

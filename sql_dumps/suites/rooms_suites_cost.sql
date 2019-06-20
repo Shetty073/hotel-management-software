@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS suites_cost
 (
     room_cost_id int primary key not null auto_increment,
     room_type    varchar(64)     not null,
-    cost         float(6, 2)     not null
+    cost         double          not null
 );
 INSERT INTO suites_cost
     (room_type, cost)
