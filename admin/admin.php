@@ -23,66 +23,10 @@ if ($_SESSION["loggedin"] == false) {
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-
+    <!-- Our custom template adjustments -->
+    <link href="../css/admin_template.css" rel="stylesheet">
 
     <style>
-        .dboard {
-            padding-top: 45px;
-        }
-
-        .iconic {
-            width: 16px;
-            height: 16px;
-            color: #959596;
-        }
-
-        .iconic:hover {
-            color: black;
-        }
-
-        .nav-link {
-            color: #959596;
-            font-weight: 500;
-        }
-
-        .nav-link:hover {
-            color: black;
-        }
-
-        .iconic {
-            width: 16px;
-            height: 16px;
-            color: #959596;
-        }
-
-        .iconic:hover {
-            color: black;
-        }
-
-        .active {
-            color: #63AEFD;
-        }
-
-        .active:hover {
-            color: #63AEFD;
-        }
-
-        .management-nav {
-            font-weight: 500;
-        }
-
-        .sidebar-sticky {
-            position: sticky;
-            height: calc(100vh - 48px);
-            padding-top: .5rem;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-
-        .sidebar-heading {
-            color: black !important;
-        }
-
         .btn-outline-light:hover {
             border-color: #6C757D !important;
             color: #6C757D !important;
@@ -157,28 +101,29 @@ if ($_SESSION["loggedin"] == false) {
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="#">
+                        <a class="nav-link management-nav" href="../admin/internal_management/employees/employees.php">
                             <span><img class="iconic" src="../css/open-iconic/svg/employees.svg"
                                        alt="employees"></span>
                             Employees
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="#">
+                        <a class="nav-link management-nav"
+                           href="../admin/internal_management/departments/departments.php">
                             <span><img class="iconic" src="../css/open-iconic/svg/departments.svg"
                                        alt="departments"></span>
                             Departments
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="#">
+                        <a class="nav-link management-nav" href="../admin/internal_management/stocks/stocks.php">
                             <span><img class="iconic" src="../css/open-iconic/svg/stocks.svg"
                                        alt="stocks"></span>
                             Stocks
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="#">
+                        <a class="nav-link management-nav" href="../admin/internal_management/set_costs/set_costs.php">
                             <span><img class="iconic" src="../css/open-iconic/svg/set-costs.svg"
                                        alt="set-costs"></span>
                             Set costs

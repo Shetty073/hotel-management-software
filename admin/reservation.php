@@ -23,66 +23,11 @@ if ($_SESSION["loggedin"] == false) {
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <!-- Our custom template adjustments -->
+    <link href="../css/admin_template.css" rel="stylesheet">
 
 
     <style>
-        .dboard {
-            padding-top: 45px;
-        }
-
-        .iconic {
-            width: 16px;
-            height: 16px;
-            color: #959596;
-        }
-
-        .iconic:hover {
-            color: black;
-        }
-
-        .nav-link {
-            color: #959596;
-            font-weight: 500;
-        }
-
-        .nav-link:hover {
-            color: black;
-        }
-
-        .iconic {
-            width: 16px;
-            height: 16px;
-            color: #959596;
-        }
-
-        .iconic:hover {
-            color: black;
-        }
-
-        .active {
-            color: #63AEFD;
-        }
-
-        .active:hover {
-            color: #63AEFD;
-        }
-
-        .management-nav {
-            font-weight: 500;
-        }
-
-        .sidebar-sticky {
-            position: sticky;
-            height: calc(100vh - 48px);
-            padding-top: .5rem;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-
-        .sidebar-heading {
-            color: black !important;
-        }
-
         .table-secondary {
             background-color: #697179;
             color: white;
@@ -172,28 +117,28 @@ if ($_SESSION["loggedin"] == false) {
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="#">
+                        <a class="nav-link management-nav" href="../admin/internal_management/employees/employees.php">
                             <span><img class="iconic" src="../css/open-iconic/svg/employees.svg"
                                        alt="employees"></span>
                             Employees
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="#">
+                        <a class="nav-link management-nav" href="../admin/internal_management/departments/departments.php">
                             <span><img class="iconic" src="../css/open-iconic/svg/departments.svg"
                                        alt="departments"></span>
                             Departments
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="#">
+                        <a class="nav-link management-nav" href="../admin/internal_management/stocks/stocks.php">
                             <span><img class="iconic" src="../css/open-iconic/svg/stocks.svg"
                                        alt="stocks"></span>
                             Stocks
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="#">
+                        <a class="nav-link management-nav" href="../admin/internal_management/set_costs/set_costs.php">
                             <span><img class="iconic" src="../css/open-iconic/svg/set-costs.svg"
                                        alt="set-costs"></span>
                             Set costs
@@ -252,7 +197,7 @@ if ($_SESSION["loggedin"] == false) {
                         echo "<td>$name</td>";
                         echo "<td><a class=\"btn btn-outline-light\" href=\"http://$_SERVER[HTTP_HOST]/admin/roombooking/update_checkout_date.php?stno=$suite_no&dat=$checkout_date\">$checkout_date</a></td>";
                         echo "<td><a class=\"btn btn-outline-light\" href=\"http://$_SERVER[HTTP_HOST]/admin/roombooking/reservationdetails.php?det=$suite_no\">Details</a></td>";
-                        echo "<td><a class=\"btn btn-outline-light\" href=\"#\">Services</a></td>";
+                        echo "<td><a class=\"btn btn-outline-light\" href=\"http://$_SERVER[HTTP_HOST]/admin/services/room_services.php?det=$suite_no\">Services</a></td>";
                         echo "<td><a class=\"btn btn-outline-light check-out-btn\" href=\"#\">Checkout</a></td>";
                         echo "</tr>";
                     }

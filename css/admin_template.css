@@ -1,0 +1,63 @@
+/* This file contains style adjustments for all our pages */
+
+.dboard {
+    padding-top: 45px;
+}
+
+.iconic {
+    width: 16px;
+    height: 16px;
+    color: #959596;
+}
+
+.iconic:hover {
+    color: black;
+}
+
+.nav-link {
+    color: #959596;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: black;
+}
+
+.iconic {
+    width: 16px;
+    height: 16px;
+    color: #959596;
+}
+
+.active {
+    color: #63AEFD;
+}
+
+.active:hover {
+    color: #63AEFD;
+}
+
+.management-nav {
+    font-weight: 500;
+}
+
+.sidebar-sticky {
+    position: sticky;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.sidebar-heading {
+    color: black !important;
+}
+
+h1 {
+    color: #474f57 !important;
+}
+
+.sidebar-heading span {
+    color: #474f57 !important;
+    font-weight: bold;
+}

@@ -8,7 +8,7 @@ session_start();
 include_once "../include/db_var.php";
 
 // Database connection
-$conn = mysqli_connect($db_host, $db_user, $db_pass, "administration");
+$conn = mysqli_connect($db_host, $db_user, $db_pass, "departments");
 
 // Form data
 $usr = mysqli_real_escape_string($conn, $_POST["username"]);

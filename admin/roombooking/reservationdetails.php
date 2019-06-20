@@ -23,66 +23,10 @@ if ($_SESSION["loggedin"] == false) {
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
-
+    <!-- Our custom template adjustments -->
+    <link href="../../css/admin_template.css" rel="stylesheet">
 
     <style>
-        .dboard {
-            padding-top: 45px;
-        }
-
-        .iconic {
-            width: 16px;
-            height: 16px;
-            color: #959596;
-        }
-
-        .iconic:hover {
-            color: black;
-        }
-
-        .nav-link {
-            color: #959596;
-            font-weight: 500;
-        }
-
-        .nav-link:hover {
-            color: black;
-        }
-
-        .iconic {
-            width: 16px;
-            height: 16px;
-            color: #959596;
-        }
-
-        .iconic:hover {
-            color: black;
-        }
-
-        .active {
-            color: #63AEFD;
-        }
-
-        .active:hover {
-            color: #63AEFD;
-        }
-
-        .management-nav {
-            font-weight: 500;
-        }
-
-        .sidebar-sticky {
-            position: sticky;
-            height: calc(100vh - 48px);
-            padding-top: .5rem;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-
-        .sidebar-heading {
-            color: black !important;
-        }
-
         .table-secondary {
             background-color: #697179;
             color: white;
@@ -100,6 +44,22 @@ if ($_SESSION["loggedin"] == false) {
 
         th {
             width: 200px;
+        }
+
+
+        /* For window.print() this changes the visibility of every element other than the table to hidden */
+        @media print {
+            nav, p, a, h1, .d-flex {
+                visibility: hidden;
+                color: #000000 !important;
+            }
+
+            table {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                color: #1d2124 !important;
+            }
         }
     </style>
 </head>
@@ -170,28 +130,31 @@ if ($_SESSION["loggedin"] == false) {
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="#">
+                        <a class="nav-link management-nav"
+                           href="../../admin/internal_management/employees/employees.php">
                             <span><img class="iconic" src="../../css/open-iconic/svg/employees.svg"
                                        alt="employees"></span>
                             Employees
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="#">
+                        <a class="nav-link management-nav"
+                           href="../../admin/internal_management/departments/departments.php">
                             <span><img class="iconic" src="../../css/open-iconic/svg/departments.svg"
                                        alt="departments"></span>
                             Departments
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="#">
+                        <a class="nav-link management-nav" href="../../admin/internal_management/stocks/stocks.php">
                             <span><img class="iconic" src="../../css/open-iconic/svg/stocks.svg"
                                        alt="stocks"></span>
                             Stocks
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="#">
+                        <a class="nav-link management-nav"
+                           href="../../admin/internal_management/set_costs/set_costs.php">
                             <span><img class="iconic" src="../../css/open-iconic/svg/set-costs.svg"
                                        alt="set-costs"></span>
                             Set costs
@@ -203,18 +166,20 @@ if ($_SESSION["loggedin"] == false) {
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Guest details for suite no.: <?php $s_no = $_GET['det'];
+                <h1 id="heading" class="h2">Guest details for suite no.: <?php $s_no = $_GET['det'];
                     echo "$s_no" ?></h1>
                 <div class="btn-toolbar mb-2 mb-md-0">
                     <div class="btn-group mr-2">
-                        <a type="button" class="btn btn-sm btn-outline-secondary" href="#">Export</a>
+                        <a class="btn btn-sm btn-outline-secondary" href="#" onclick="">Share</a>
+                        <a class="btn btn-sm btn-outline-secondary" href="#"
+                           onclick="window.print();">Print</a>
                     </div>
                 </div>
             </div>
             <p>
                 <a class="btn btn-outline-secondary" href="../../admin/reservation.php">< Back</a>
             </p>
-            <table class="table table-bordered table-secondary">
+            <table class="table table-bordered table-secondary" id="table-print">
                 <tbody>
                 <?php
 

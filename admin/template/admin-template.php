@@ -25,65 +25,11 @@ if ($_SESSION["loggedin"] == false) {
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
-
+    <!-- Our custom template adjustments -->
+    <link href="../css/admin_template.css" rel="stylesheet">
 
     <style>
-        .dboard {
-            padding-top: 45px;
-        }
-
-        .iconic {
-            width: 16px;
-            height: 16px;
-            color: #959596;
-        }
-
-        .iconic:hover {
-            color: black;
-        }
-
-        .nav-link {
-            color: #959596;
-            font-weight: 500;
-        }
-
-        .nav-link:hover {
-            color: black;
-        }
-
-        .iconic {
-            width: 16px;
-            height: 16px;
-            color: #959596;
-        }
-
-        .iconic:hover {
-            color: black;
-        }
-
-        .active {
-            color: #63AEFD;
-        }
-
-        .active:hover {
-            color: #63AEFD;
-        }
-
-        .management-nav {
-            font-weight: 500;
-        }
-
-        .sidebar-sticky {
-            position: sticky;
-            height: calc(100vh - 48px);
-            padding-top: .5rem;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-
-        .sidebar-heading {
-            color: black !important;
-        }
+    /* Embedded styles here */
     </style>
 </head>
 <body>
