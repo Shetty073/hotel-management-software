@@ -30,6 +30,39 @@ if ($_SESSION["loggedin"] == false) {
 
     <style>
         /* Embedded styles */
+        .table-secondary {
+            background-color: #697179;
+            color: white;
+        }
+
+        table tbody tr:hover {
+            background-color: #6C757D !important;
+            color: white !important;
+        }
+
+        .btn-outline-light:hover {
+            border-color: #6C757D !important;
+            color: #6C757D !important;
+        }
+
+        th {
+            width: 200px;
+        }
+
+        /* For window.print() this changes the visibility of every element other than the table to hidden */
+        @media print {
+            nav, p, a, h1, .d-flex {
+                visibility: hidden;
+                color: #000000 !important;
+            }
+
+            table {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                color: #1d2124 !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -135,18 +168,65 @@ if ($_SESSION["loggedin"] == false) {
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Employees</h1>
-                <!--                <div class="btn-toolbar mb-2 mb-md-0">-->
-                <!--                    <div class="btn-group mr-2">-->
-                <!--                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>-->
-                <!--                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>-->
-                <!--                    </div>-->
-                <!--                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">-->
-                <!--                        <span data-feather="calendar"></span>-->
-                <!--                        This week-->
-                <!--                    </button>-->
-                <!--                </div>-->
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <a class="btn btn-outline-secondary" href="./new_employees/add_employee.php">New employee</a>
+                        <a class="btn btn-outline-secondary" href="#" onclick="window.print()">Print</a>
+                    </div>
+                    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                        <span data-feather="calendar"></span>
+                        Manager
+                    </button>
+                </div>
             </div>
+            <table class="table table-hover table-secondary">
+                <thead>
+                <tr>
+                    <th scope="col">Employee #</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Hiring Date</th>
+                    <th scope="col">Post</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
 
+                // Include the database variables file
+                include_once "../../../include/db_var.php";
+
+                // Database connection
+                $conn = mysqli_connect($db_host, $db_user, $db_pass, "departments");
+
+                if (!$conn) {
+                    //    die("Error! could not connect to database".mysqli_error($conn));
+                    echo "<div class='alert alert-danger alert-dismissible fade show col-md-12' style='padding: 4px; font-size: 14px;'><button type='button' class='close' data-dismiss='alert' style='padding: 0px;'>&times;</button>Database connection error</div>";
+                    die();
+                }
+
+                $query = "SELECT * FROM employees";
+                $result = mysqli_query($conn, $query);
+                if (mysqli_num_rows($result) >= 1) {
+                    while ($row = mysqli_fetch_array($result)) {
+                        $emp_id = $row['employee_id'];
+                        $fname = $row['fname'];
+                        $lname = $row['lname'];
+                        $name = $fname . " " . $lname;
+                        // MariaDB SQL stores date type data in the format yyyy-mm-dd
+                        // Change its format to dd-mm-yyy before displaying it
+                        $hiring_date = date("d-m-Y", strtotime($row['hiring_date']));
+                        $post = $row['post'];
+                        echo "<tr>";
+                        echo "<td scope=\"row\">$emp_id</td>";
+                        echo "<td>$name</td>";
+                        echo "<td>$hiring_date</td>";
+                        echo "<td>$post</td>";
+                        echo "</tr>";
+                    }
+                }
+
+                ?>
+                </tbody>
+            </table>
         </main>
     </div>
 </div>

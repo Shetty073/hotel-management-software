@@ -3,7 +3,6 @@
 // Session start
 session_start();
 
-
 // Include the database variables file
 include_once "../../include/db_var.php";
 

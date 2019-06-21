@@ -9,6 +9,8 @@ A web based hotel management software.
 ![Image 05](https://i.imgur.com/MNVzDqw.png)
 ![Image 06](https://i.imgur.com/BDKD81r.png)
 
+> Temp username: temp password: temp
+
 #### Features
 * Dashboard
 * Suite reservation system
