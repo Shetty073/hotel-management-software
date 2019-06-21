@@ -35,7 +35,7 @@ $password = password_hash($raw_pass, PASSWORD_BCRYPT);
 // Query
 $query = "INSERT INTO employees(fname, lname, username, password, email, phone, hiring_date, department, post, salary) VALUES ('$first_name', '$last_name', '$user_name', '$password', '$email', '$phone', '$hiring_date', '$department', '$post', $salary);";
 if (mysqli_query($conn, $query)) {
-    header("Location: http://$_SERVER[HTTP_HOST]/admin/roombooking/newbooking.php?success=1");
+    header("Location: http://$_SERVER[HTTP_HOST]/admin/internal_management/employees/new_employees/add_employee.php?success=1");
 }
 
 // Close database connection
