@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2019 at 06:16 PM
+-- Generation Time: Nov 03, 2019 at 09:35 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -19,111 +19,8 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `customer`
---
-CREATE DATABASE IF NOT EXISTS `customer` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `customer`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `customers_data`
---
-
-CREATE TABLE IF NOT EXISTS `customers_data` (
-  `customer_id` int(11) NOT NULL AUTO_INCREMENT,
-  `room_no` int(11) NOT NULL,
-  `room_type` varchar(64) NOT NULL,
-  `fname` varchar(32) DEFAULT NULL,
-  `lname` varchar(32) DEFAULT NULL,
-  `checkin_date` date DEFAULT NULL,
-  `checkout_date` date DEFAULT NULL,
-  `no_of_guests` int(11) DEFAULT NULL,
-  `room_services` varchar(256) DEFAULT NULL,
-  `email` varchar(128) DEFAULT NULL,
-  `phone` varchar(24) DEFAULT NULL,
-  `address` text,
-  `country` varchar(128) DEFAULT NULL,
-  `state` varchar(128) DEFAULT NULL,
-  `city` varchar(128) DEFAULT NULL,
-  PRIMARY KEY (`customer_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- RELATIONSHIPS FOR TABLE `customers_data`:
---
---
--- Database: `departments`
---
-CREATE DATABASE IF NOT EXISTS `departments` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `departments`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `departments`
---
-
-CREATE TABLE IF NOT EXISTS `departments` (
-  `department_id` int(11) NOT NULL AUTO_INCREMENT,
-  `department_name` varchar(24) NOT NULL,
-  PRIMARY KEY (`department_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-
---
--- RELATIONSHIPS FOR TABLE `departments`:
---
-
---
--- Dumping data for table `departments`
---
-
-INSERT INTO `departments` (`department_id`, `department_name`) VALUES
-(1, 'Management'),
-(2, 'IT services'),
-(3, 'Accounting'),
-(4, 'Massage services'),
-(5, 'Laundry services'),
-(6, 'Room services');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `employees`
---
-
-CREATE TABLE IF NOT EXISTS `employees` (
-  `employee_id` int(11) NOT NULL AUTO_INCREMENT,
-  `fname` varchar(64) NOT NULL,
-  `lname` varchar(64) NOT NULL,
-  `username` varchar(64) NOT NULL,
-  `password` varchar(256) NOT NULL,
-  `email` varchar(64) NOT NULL,
-  `phone` varchar(24) NOT NULL,
-  `hiring_date` date NOT NULL,
-  `department` varchar(24) NOT NULL,
-  `post` text NOT NULL,
-  `salary` double NOT NULL,
-  PRIMARY KEY (`employee_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-
---
--- RELATIONSHIPS FOR TABLE `employees`:
---
-
---
--- Dumping data for table `employees`
---
-
-INSERT INTO `employees` (`employee_id`, `fname`, `lname`, `username`, `password`, `email`, `phone`, `hiring_date`, `department`, `post`, `salary`) VALUES
-(1, 'Temporary', 'User', 'temp', '$2y$10$MjDfB5.7mh8Kvm6s1K5xeOhw0O0Rz1wn1ORXY/ZljRZZm7zHYt58y', 'temp@sierrahotels.com', '9191919191', '2019-06-21', 'Management', 'Manager', 40000),
-(2, 'Ashish', 'Shetty', 'ashish', '$2y$10$.F9mHEazoZm5Kty.ZOHIh.VrSOrG5PxtpkWkDKpjfnBnrgM5i6//G', 'shettyashish@sierrahotels.com', '9874561235', '2019-06-21', 'Management', 'Manager', 50000),
-(3, 'Cosmo', 'Kramer', 'kramer', '$2y$10$72yUdT/dWZT8xlhSQK7jIuRP32pGw3FQ4/Fd7cQrxFh6fUVnW/A1G', 'kramer@gmail.com', '+123564578', '2019-06-21', 'Room services', 'Cleaner', 5000);
---
 -- Database: `rooms`
 --
-CREATE DATABASE IF NOT EXISTS `rooms` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `rooms`;
 
 -- --------------------------------------------------------
 
@@ -131,8 +28,8 @@ USE `rooms`;
 -- Table structure for table `suites`
 --
 
-CREATE TABLE IF NOT EXISTS `suites` (
-  `room_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `suites` (
+  `room_id` int(11) NOT NULL,
   `room_no` int(11) NOT NULL,
   `checked_in` bit(1) NOT NULL,
   `fname` varchar(32) DEFAULT NULL,
@@ -147,20 +44,15 @@ CREATE TABLE IF NOT EXISTS `suites` (
   `booked_from` date DEFAULT NULL,
   `booked_to` date DEFAULT NULL,
   `room_services` varchar(256) DEFAULT NULL,
-  `under_maintainance` bit(1) NOT NULL,
-  `room_type` varchar(64) NOT NULL,
-  PRIMARY KEY (`room_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=latin1;
-
---
--- RELATIONSHIPS FOR TABLE `suites`:
---
+  `under_maintenance` bit(1) NOT NULL,
+  `room_type` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `suites`
 --
 
-INSERT INTO `suites` (`room_id`, `room_no`, `checked_in`, `fname`, `lname`, `email`, `phone`, `address`, `country`, `state`, `city`, `no_of_guests`, `booked_from`, `booked_to`, `room_services`, `under_maintainance`, `room_type`) VALUES
+INSERT INTO `suites` (`room_id`, `room_no`, `checked_in`, `fname`, `lname`, `email`, `phone`, `address`, `country`, `state`, `city`, `no_of_guests`, `booked_from`, `booked_to`, `room_services`, `under_maintenance`, `room_type`) VALUES
 (1, 1000, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'0', 'Sierra Cozy'),
 (2, 1001, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'0', 'Sierra Cozy'),
 (3, 1002, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'0', 'Sierra Cozy'),
@@ -189,10 +81,10 @@ INSERT INTO `suites` (`room_id`, `room_no`, `checked_in`, `fname`, `lname`, `ema
 (26, 2000, b'1', '123', '123', '123@gmail.com', '123456789', '123', 'india', 'mh', 'kalyan', 1, '2019-08-22', '2019-12-30', '0', b'0', 'Sierra Cozy XL'),
 (27, 2001, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'0', 'Sierra Cozy XL'),
 (28, 2002, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'0', 'Sierra Cozy XL'),
-(29, 2003, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'0', 'Sierra Cozy XL'),
+(29, 2003, b'1', 'Albert', 'Da Vinci', 'davinci@albertco.com', '1245665589', '324 14Th street road, albert nagar', 'France', 'France', 'Paris', 2, '2019-11-04', '2019-11-15', '0', b'0', 'Sierra Cozy XL'),
 (30, 2004, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'0', 'Sierra Cozy XL'),
-(31, 2005, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'0', 'Sierra Cozy XL'),
-(32, 2006, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'0', 'Sierra Cozy XL'),
+(31, 2005, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'1', 'Sierra Cozy XL'),
+(32, 2006, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'1', 'Sierra Cozy XL'),
 (33, 2007, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'0', 'Sierra Cozy XL'),
 (34, 2008, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'0', 'Sierra Cozy XL'),
 (35, 2009, b'0', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '0', b'0', 'Sierra Cozy XL'),
@@ -293,16 +185,11 @@ INSERT INTO `suites` (`room_id`, `room_no`, `checked_in`, `fname`, `lname`, `ema
 -- Table structure for table `suites_cost`
 --
 
-CREATE TABLE IF NOT EXISTS `suites_cost` (
-  `room_cost_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `suites_cost` (
+  `room_cost_id` int(11) NOT NULL,
   `room_type` varchar(64) NOT NULL,
-  `cost` double NOT NULL,
-  PRIMARY KEY (`room_cost_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
-
---
--- RELATIONSHIPS FOR TABLE `suites_cost`:
---
+  `cost` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `suites_cost`
@@ -314,29 +201,38 @@ INSERT INTO `suites_cost` (`room_cost_id`, `room_type`, `cost`) VALUES
 (3, 'Sierra Grand', 2000),
 (4, 'Sierra Sea View', 4000),
 (5, 'Sierra Maharaja', 8000);
---
--- Database: `services`
---
-CREATE DATABASE IF NOT EXISTS `services` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `services`;
-
--- --------------------------------------------------------
 
 --
--- Table structure for table `housekeeping`
+-- Indexes for dumped tables
 --
 
-CREATE TABLE IF NOT EXISTS `housekeeping` (
-  `housekeeping_id` int(11) NOT NULL AUTO_INCREMENT,
-  `room_no` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `status` tinyint(1) NOT NULL,
-  PRIMARY KEY (`housekeeping_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+--
+-- Indexes for table `suites`
+--
+ALTER TABLE `suites`
+  ADD PRIMARY KEY (`room_id`);
 
 --
--- RELATIONSHIPS FOR TABLE `housekeeping`:
+-- Indexes for table `suites_cost`
 --
+ALTER TABLE `suites_cost`
+  ADD PRIMARY KEY (`room_cost_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `suites`
+--
+ALTER TABLE `suites`
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+
+--
+-- AUTO_INCREMENT for table `suites_cost`
+--
+ALTER TABLE `suites_cost`
+  MODIFY `room_cost_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

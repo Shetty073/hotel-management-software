@@ -3,6 +3,7 @@
 // Session start
 session_start();
 
+
 // Include the database variables file
 include_once "../../include/db_var.php";
 
@@ -30,7 +31,7 @@ $check_out = mysqli_real_escape_string($conn, $_POST["toDate"]);
 $no_of_guests = mysqli_real_escape_string($conn, $_POST["numofguests"]);
 
 // Query
-$query = "SELECT * FROM suites WHERE room_type='$room_type' AND checked_in=0 AND under_maintainance=0";
+$query = "SELECT * FROM suites WHERE room_type='$room_type' AND checked_in=0 AND under_maintenance=0";
 $result = mysqli_query($conn, $query);
 if (mysqli_num_rows($result) >= 1) {
     $row = $result->fetch_assoc();

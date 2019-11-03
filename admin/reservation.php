@@ -9,6 +9,9 @@ if ($_SESSION["loggedin"] == false) {
     header("Location: http://$_SERVER[HTTP_HOST]/login.php");
 }
 
+// set the fromreservationpage session variable for our checkout_service access restriction
+$_SESSION["fromreservationpage"] = true;
+
 ?>
 
 <!doctype html>
@@ -46,6 +49,44 @@ if ($_SESSION["loggedin"] == false) {
         .check-out-btn:hover, .check-out-btn:active:focus {
             border-color: white !important;
             background-color: red !important;
+            color: white !important;
+        }
+
+
+        .no-check-out-btn:hover, .no-check-out-btn:active:focus {
+            border-color: white !important;
+            background-color: green !important;
+            color: white !important;
+        }
+
+        .modal {
+            color: #343A40 !important;
+        }
+
+        .modal-header {
+            background-color: #343A40 !important;
+            color: white !important;
+        }
+
+        #modal-yes-btn {
+            color: #343A40 !important;
+        }
+
+        #modal-yes-btn:hover, #modal-yes-btn:active:focus {
+            border-color: white !important;
+            background-color: red !important;
+            color: white !important;
+        }
+
+        .close {
+            color: white !important;
+        }
+
+        #modal-headline-inline {
+            display: inline !important;
+            width: 80px !important;
+            background-color: #343A40 !important;
+            border: none !important;
             color: white !important;
         }
     </style>
@@ -124,7 +165,8 @@ if ($_SESSION["loggedin"] == false) {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="../admin/internal_management/departments/departments.php">
+                        <a class="nav-link management-nav"
+                           href="../admin/internal_management/departments/departments.php">
                             <span><img class="iconic" src="../css/open-iconic/svg/departments.svg"
                                        alt="departments"></span>
                             Departments
@@ -198,7 +240,33 @@ if ($_SESSION["loggedin"] == false) {
                         echo "<td><a class=\"btn btn-outline-light\" href=\"http://$_SERVER[HTTP_HOST]/admin/roombooking/update_checkout_date.php?stno=$suite_no&dat=$checkout_date\">$checkout_date</a></td>";
                         echo "<td><a class=\"btn btn-outline-light\" href=\"http://$_SERVER[HTTP_HOST]/admin/roombooking/reservationdetails.php?det=$suite_no\">Details</a></td>";
                         echo "<td><a class=\"btn btn-outline-light\" href=\"http://$_SERVER[HTTP_HOST]/admin/services/room_services.php?det=$suite_no\">Services</a></td>";
-                        echo "<td><a class=\"btn btn-outline-light check-out-btn\" href=\"#\">Checkout</a></td>";
+                        echo "<td><a class=\"btn btn-outline-light check-out-btn\" data-toggle=\"modal\" data-target=\"#myModal\" href=\"#\">Checkout</a></td>";
+                        // Above href value is for passing variable $suite_no to the bootstrap modal. We will set the same value as the modal's ID
+                        // Bootstrap Modal
+                        echo "<div class=\"modal fade\" id=\"myModal\" role=\"dialog\">";
+                        echo "<div class=\"modal-dialog\">";
+                        // Modal content
+                        echo "<div class=\"modal-content\">";
+                        // open form for sending data via POST method
+                        echo "<form action=\"checkout_service.php\" method=\"post\">";
+                        echo "<div class=\"modal-header\">";
+                        echo "<h4 class=\"modal-title\">Confirm checkout for room no.: $suite_no ?</h4>";
+                        // The data inside the above div ($suite_no) is sent to the checkout_service via POST on submit
+                        echo "<button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>";
+                        echo "</div>";
+                        echo "<div class=\"modal-body\">";
+                        echo "<p>Please confirm that you want to checkout: Yes or No</p>";
+                        echo "</div>";
+                        echo "<div class=\"modal-footer\">";
+                        echo "<a class=\"btn btn-outline-light check-out-btn\" id=\"modal-yes-btn\" href=\"http://$_SERVER[HTTP_HOST]/admin/checkout_service.php?det=$suite_no\">Yes</a>";
+                        echo "<a class=\"btn btn-outline-light no-check-out-btn\" data-dismiss=\"modal\">No</a>";
+                        echo "</div>";
+                        echo "</form>";
+                        // form closed
+                        echo "</div>";
+                        echo "</div>";
+                        echo "</div>";
+                        // Modal closed
                         echo "</tr>";
                     }
                 }

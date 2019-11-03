@@ -2,12 +2,27 @@
 
 // Session start
 session_start();
-// Check if this page was accessed through URL directly or through the login process
-// If this page was accessed through URL directly then access must be dened and user must be brought back to
-// the login page, else user stays on this page.
+
+// If this page was accessed through URL directly then access must be denied and user must be brought back to
+// the reservation page, else we process the data.
 if ($_SESSION["loggedin"] == false) {
-    header("Location: http://$_SERVER[HTTP_HOST]/login.php");
+    header("Location: http://$_SERVER[HTTP_HOST]/admin/reservation.php");
 }
+
+if (!isset($_SESSION["fromreservationpage"])) {
+    header("Location: http://$_SERVER[HTTP_HOST]/admin/reservation.php");
+    if ($_SESSION["fromreservationpage"] == false) {
+        header("Location: http://$_SERVER[HTTP_HOST]/admin/reservation.php");
+    }
+}
+$uri = parse_url($_SERVER["REQUEST_URI"]);
+
+if (isset($_SESSION["page"]) && $_SESSION["page"] != $uri["path"]) {
+    // We went to a new page
+    unset($_SESSION["fromreservationpage"]);
+}
+// Remember our current page.
+$_SESSION["page"] = $uri["path"];
 
 ?>
 
@@ -19,7 +34,7 @@ if ($_SESSION["loggedin"] == false) {
     <meta name="description" content="">
     <meta name="author" content="Ashish Shetty">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Admin:Services - Sierra Hotels</title>
+    <title>Admin:Checkout & Billing - Sierra Hotels</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -27,7 +42,7 @@ if ($_SESSION["loggedin"] == false) {
     <link href="../css/admin_template.css" rel="stylesheet">
 
     <style>
-        /* Embedded styles */
+        /* Embedded styles here */
     </style>
 </head>
 <body>
@@ -53,8 +68,8 @@ if ($_SESSION["loggedin"] == false) {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../admin/reservation.php">
-                            <span><img class="iconic" src="../css/open-iconic/svg/calendar.svg"
+                        <a class="nav-link active" href="../admin/reservation.php">
+                            <span><img class="iconic active" src="../css/open-iconic/svg/calendar.svg"
                                        alt="reservation"></span>
                             Reservation
                         </a>
@@ -67,8 +82,8 @@ if ($_SESSION["loggedin"] == false) {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            <span><img class="iconic active" src="../css/open-iconic/svg/services.svg"
+                        <a class="nav-link" href="../admin/services.php">
+                            <span><img class="iconic" src="../css/open-iconic/svg/services.svg"
                                        alt="services"></span>
                             Services
                         </a>
@@ -97,29 +112,28 @@ if ($_SESSION["loggedin"] == false) {
                 </h6>
                 <ul class="nav flex-column mb-2">
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="../admin/internal_management/employees/employees.php">
+                        <a class="nav-link management-nav" href="#">
                             <span><img class="iconic" src="../css/open-iconic/svg/employees.svg"
                                        alt="employees"></span>
                             Employees
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link management-nav"
-                           href="../admin/internal_management/departments/departments.php">
+                        <a class="nav-link management-nav" href="#">
                             <span><img class="iconic" src="../css/open-iconic/svg/departments.svg"
                                        alt="departments"></span>
                             Departments
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="../admin/internal_management/stocks/stocks.php">
+                        <a class="nav-link management-nav" href="#">
                             <span><img class="iconic" src="../css/open-iconic/svg/stocks.svg"
                                        alt="stocks"></span>
                             Stocks
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link management-nav" href="../admin/internal_management/set_costs/set_costs.php">
+                        <a class="nav-link management-nav" href="#">
                             <span><img class="iconic" src="../css/open-iconic/svg/set-costs.svg"
                                        alt="set-costs"></span>
                             Set costs
@@ -131,24 +145,18 @@ if ($_SESSION["loggedin"] == false) {
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Services</h1>
-            </div>
-
-            <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
-                <div class="card-header">Housekeeping service</div>
-                <div class="card-body">
-                    <!--                    <h5 class="card-title">Availability</h5>-->
-                    <p class="card-text">
-                        Making sure the sanitation, orderly and appeal of the suites is up to high standard in the
-                        hotel.
-                        Suites are automatically marked for housekeeping after checkout but a suite can also be
-                        manually
-                        opted in for this service as per hotel staff or guest request.
-                    </p>
-                    <a class="btn btn-outline-light" href="./services/housekeeping_service.php">View</a>
+                <h1 class="h2">Checkout & Billing</h1>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <div class="btn-group mr-2">
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                        <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                    </div>
                 </div>
             </div>
 
+            <?php
+            echo $_GET["det"];
+            ?>
         </main>
     </div>
 </div>

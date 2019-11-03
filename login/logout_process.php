@@ -16,5 +16,3 @@ else {
     header("Location: http://$_SERVER[HTTP_HOST]/login.php?logout=1");
     die();
 }
-
-?>

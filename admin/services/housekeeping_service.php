@@ -19,7 +19,7 @@ if ($_SESSION["loggedin"] == false) {
     <meta name="description" content="">
     <meta name="author" content="Ashish Shetty">
     <meta name="generator" content="Jekyll v3.8.5">
-    <title>Admin:Services - Sierra Hotels</title>
+    <title>Admin:Services:Housekeeping - Sierra Hotels</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
@@ -28,6 +28,20 @@ if ($_SESSION["loggedin"] == false) {
 
     <style>
         /* Embedded styles here */
+        .table-secondary {
+            background-color: #697179;
+            color: white;
+        }
+
+        table tbody tr:hover {
+            background-color: #6C757D !important;
+            color: white !important;
+        }
+
+        .btn-outline-light:hover {
+            border-color: #6C757D !important;
+            color: #6C757D !important;
+        }
     </style>
 </head>
 <body>
@@ -35,7 +49,7 @@ if ($_SESSION["loggedin"] == false) {
     <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Sierra Hotels</a>
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="../login/logout_process.php">Log out</a>
+            <a class="nav-link" href="../../login/logout_process.php">Log out</a>
         </li>
     </ul>
 </nav>
@@ -133,15 +147,61 @@ if ($_SESSION["loggedin"] == false) {
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 id="heading" class="h2">Services for suite no.: <?php $s_no = $_GET['det'];
-                    echo $s_no; ?></h1>
+                <h1>Housekeeping</h1>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <a class="btn btn-outline-secondary" href="../../admin/services.php">< Back</a>
+                    <a class="btn btn-outline-secondary float-right" href="./add_to_housekeeping.php">Add suite</a>
+                </div>
             </div>
             <p>
-                <a class="btn btn-outline-secondary" href="../../admin/reservation.php">< Back</a>
             </p>
-
             <!-- CONTENT GOES HERE -->
+            <table class="table table-hover table-secondary">
+                <thead>
+                <tr>
+                    <th scope="col">Suite #</th>
+                    <th scope="col">Added On</th>
+                    <th scope="col">Maintenance Type</th>
+                    <th scope="col">Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
 
+                // Include the database variables file
+                include_once "../../include/db_var.php";
+
+                // Database connection
+                $conn = mysqli_connect($db_host, $db_user, $db_pass, "services");
+
+                if (!$conn) {
+                    //    die("Error! could not connect to database".mysqli_error($conn));
+                    echo "<div class='alert alert-danger alert-dismissible fade show col-md-12' style='padding: 4px; font-size: 14px;'><button type='button' class='close' data-dismiss='alert' style='padding: 0px;'>&times;</button>Database connection error</div>";
+                    die();
+                }
+
+                $query = "SELECT * FROM housekeeping";
+                $result = mysqli_query($conn, $query);
+                if (mysqli_num_rows($result) >= 1) {
+                    while ($row = mysqli_fetch_array($result)) {
+                        $suite_no = $row['room_no'];
+                        $date = date("d-m-Y h:i:s a", strtotime($row['date']));
+                        $maintenance_type = $row['maintenance_type'];
+                        echo "<tr>";
+                        echo "<td>$suite_no</td>";
+                        echo "<td>$date</td>";
+                        echo "<td>$maintenance_type</td>";
+                        echo "<td><a class=\"btn btn-outline-light\" href=\"http://$_SERVER[HTTP_HOST]/admin/services/housekeeping_details.php?det=$suite_no\">Details</a></td>";
+                        // Modal closed
+                        echo "</tr>";
+                    }
+                }
+
+                ?>
+                </tbody>
+            </table>
 
         </main>
     </div>

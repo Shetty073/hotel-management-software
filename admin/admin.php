@@ -31,6 +31,12 @@ if ($_SESSION["loggedin"] == false) {
             border-color: #6C757D !important;
             color: #6C757D !important;
         }
+        .card {
+            display: inline-block;
+        }
+        .card-margin-right {
+            margin-right: 40px;
+        }
     </style>
 </head>
 <body>
@@ -137,7 +143,7 @@ if ($_SESSION["loggedin"] == false) {
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                 <h1 class="h2">Dashboard</h1>
             </div>
-            <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+            <div class="card text-white bg-secondary mb-3 card-margin-right" style="max-width: 18rem;">
                 <div class="card-header">Suites</div>
                 <div class="card-body">
                     <h5 class="card-title">Availability</h5>
@@ -158,7 +164,7 @@ if ($_SESSION["loggedin"] == false) {
 
                         // Get the required data from database table "suites"
                         // Total available suites
-                        $available_results = mysqli_query($conn, "SELECT * FROM suites WHERE checked_in=0 AND under_maintainance=0");
+                        $available_results = mysqli_query($conn, "SELECT * FROM suites WHERE checked_in=0 AND under_maintenance=0");
                         $available_rooms = mysqli_num_rows($available_results);
 
                         // Total no. of suites in hotel (available or not)
@@ -166,23 +172,23 @@ if ($_SESSION["loggedin"] == false) {
                         $total_rooms = mysqli_num_rows($total_results);
 
                         // No of available Sierra Cozy suites
-                        $cozy_results = mysqli_query($conn, "SELECT * FROM suites WHERE room_type='Sierra Cozy' AND checked_in=0 AND under_maintainance=0");
+                        $cozy_results = mysqli_query($conn, "SELECT * FROM suites WHERE room_type='Sierra Cozy' AND checked_in=0 AND under_maintenance=0");
                         $cozy_rooms = mysqli_num_rows($cozy_results);
 
                         // No of available Sierra Cozy XL suites
-                        $cozy_xl_results = mysqli_query($conn, "SELECT * FROM suites WHERE room_type='Sierra Cozy XL' AND checked_in=0 AND under_maintainance=0");
+                        $cozy_xl_results = mysqli_query($conn, "SELECT * FROM suites WHERE room_type='Sierra Cozy XL' AND checked_in=0 AND under_maintenance=0");
                         $cozy_xl_rooms = mysqli_num_rows($cozy_xl_results);
 
                         // No of available Sierra Grand suites
-                        $grand_results = mysqli_query($conn, "SELECT * FROM suites WHERE room_type='Sierra Grand' AND checked_in=0 AND under_maintainance=0");
+                        $grand_results = mysqli_query($conn, "SELECT * FROM suites WHERE room_type='Sierra Grand' AND checked_in=0 AND under_maintenance=0");
                         $grand_rooms = mysqli_num_rows($grand_results);
 
                         // No of available Sierra Sea View suites
-                        $seaview_results = mysqli_query($conn, "SELECT * FROM suites WHERE room_type='Sierra Sea View' AND checked_in=0 AND under_maintainance=0");
+                        $seaview_results = mysqli_query($conn, "SELECT * FROM suites WHERE room_type='Sierra Sea View' AND checked_in=0 AND under_maintenance=0");
                         $seaview_rooms = mysqli_num_rows($seaview_results);
 
                         // No of available Sierra Maharaja suites
-                        $maharaja_results = mysqli_query($conn, "SELECT * FROM suites WHERE room_type='Sierra Maharaja' AND checked_in=0 AND under_maintainance=0");
+                        $maharaja_results = mysqli_query($conn, "SELECT * FROM suites WHERE room_type='Sierra Maharaja' AND checked_in=0 AND under_maintenance=0");
                         $maharaja_rooms = mysqli_num_rows($maharaja_results);
 
                         // Display the number of rooms available
@@ -196,6 +202,50 @@ if ($_SESSION["loggedin"] == false) {
                         ?>
                     </p>
                     <a class="btn btn-outline-light" href="../admin/roombooking/newbooking.php">New Booking</a>
+                </div>
+            </div>
+            <div class="card text-white bg-secondary mb-3 card-margin-right" style="max-width: 18rem;">
+                <div class="card-header">Suites Under Maintenance</div>
+                <div class="card-body">
+                    <h5 class="card-title">Under Housekeeping</h5>
+                    <p class="card-text">
+                        <?php
+
+                        // Include the database variables file
+                        include_once "../include/db_var.php";
+
+                        // Database connection
+                        $conn = mysqli_connect($db_host, $db_user, $db_pass, "services");
+
+                        // If database connection fails display an error
+                        if (!$conn) {
+                            echo "Database connection error";
+                            die();
+                        }
+
+                        // Get the required data from database table "housekeeping"
+                        // Total suites under maintenance
+                        $total_maintenance_results = mysqli_query($conn, "SELECT * FROM housekeeping");
+                        $total_maintenance_rooms = mysqli_num_rows($total_maintenance_results);
+
+                        // Total suites under minor maintenance
+                        $total_minor_results = mysqli_query($conn, "SELECT * FROM housekeeping where maintenance_type='Minor'");
+                        $total_minor = mysqli_num_rows($total_minor_results);
+
+                        // Total suites under major maintenance
+                        $total_major_results = mysqli_query($conn, "SELECT * FROM housekeeping where maintenance_type='Major'");
+                        $total_major = mysqli_num_rows($total_major_results);
+
+                        // Display the number of rooms available
+                        echo "Total <strong>$total_maintenance_rooms</strong> under maintenance." . "<br>";
+                        echo "Out of which <strong>$total_minor</strong> is under minor maintenance and";
+                        echo " <strong>$total_major</strong> is under major maintenance." . "<br>";
+
+                        ?>
+                    </p>
+                    <br>
+                    <br>
+                    <a class="btn btn-outline-light" href="../admin/services/housekeeping_service.php">More Details</a>
                 </div>
             </div>
         </main>
