@@ -1,0 +1,16 @@
+/* Side nav bar */
+#sidebarMenu {
+    height: 100vh;
+}
+
+.nav-link {
+    color: aliceblue;
+}
+
+.nav-link:hover {
+    color: lightgrey;
+}
+
+.nav-separator {
+    font-size: 1.2em;
+}
