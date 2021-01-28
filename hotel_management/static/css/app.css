@@ -1,0 +1,168 @@
+/* For all pages */
+:root {
+    --just-black: #070707;
+    --vibrant-yellow: #ffd23f;
+    --almost-red: #df2935;
+    --almost-red-hint: #b71723;
+    --fresh-green: #0cce6b;
+    --fresh-green-hint: #0a9f51;
+    --carbuncle-blue: #3454d1;
+    --silent-dove: #fff;
+    --pure-sky: aliceblue;
+    --morbid-ash: rgb(103, 103, 103);
+}
+
+.light {
+    --primary: var(--carbuncle-blue);
+    --secondary: var(--almost-red);
+    --ternary: var(--fresh-green);
+    --optional: var(--vibrant-yellow);
+    --primary-btn: var(--fresh-green);
+    --primary-btn-hover: var(--fresh-green-hint);
+    --cancel-btn: var(--almost-red);
+    --cancel-btn-hover: var(--almost-red-hint);
+    --side-nav-bg: var(--just-black);
+    --side-nav-text: var(--morbid-ash);
+    --side-nav-text-active: var(--pure-sky);
+    --primary-background-color: var(--pure-sky);
+    --secondary-background-color: var(--silent-dove);
+    --primary-text: var(--just-black);
+    --secondary-text: var(--morbid-ash);
+    --alternate-background: var(--primary-text);
+    --alternate-text: var(--primary-background-color);
+}
+
+.dark {
+    --primary: var(--carbuncle-blue);
+    --secondary: var(--almost-red);
+    --ternary: var(--fresh-green);
+    --optional: var(--vibrant-yellow);
+    --primary-btn: var(--fresh-green);
+    --primary-btn-hover: var(--fresh-green-hint);
+    --cancel-btn: var(--almost-red);
+    --cancel-btn-hover: var(--almost-red-hint);
+    --side-nav-bg: var(--just-black);
+    --side-nav-text: var(--morbid-ash);
+    --side-nav-text-active: var(--pure-sky);
+    --primary-background-color: var(--morbid-ash);
+    --secondary-background-color: var(--just-black);
+    --primary-text: var(--pure-sky);
+    --secondary-text: var(--silent-dove);
+    --alternate-background: var(--primary-text);
+    --alternate-text: var(--secondary-background-color);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px var(--primary-background-color);
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--morbid-ash);
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--morbid-ash);
+}
+
+/* app.html */
+.navbar {
+    background: var(--side-nav-bg) !important;
+}
+
+#sidebarMenu {
+    background: var(--side-nav-bg) !important;
+    color: var(--side-nav-text) !important;
+    /*min-height: 100vh;*/
+    /*position: absolute;*/
+    /*top: 2.5em;*/
+    /*left: 0;*/
+    /*bottom: 0;*/
+    /*overflow-y: scroll;*/
+}
+
+main {
+    background: var(--primary-background-color);
+    color: var(--primary-text);
+    /*min-height: 100vh;*/
+    /*position: absolute;*/
+    /*top: 2em;*/
+    /*right: 0;*/
+    /*bottom: 0;*/
+    /*overflow: auto;*/
+}
+
+.nav-link {
+    color: var(--side-nav-text);
+    text-transform: uppercase;
+}
+
+.nav-link.active {
+    color: var(--side-nav-text-active);
+}
+
+.nav-link:hover {
+    color: var(--side-nav-text-active);
+}
+
+.signout-button {
+    color: var(--cancel-btn);
+    font-weight: 700;
+    text-transform: uppercase;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.signout-button:hover {
+    color: var(--cancel-btn-hover);
+    outline: none;
+}
+
+.signout-button:focus {
+    color: var(--cancel-btn-hover);
+    outline: none;
+}
+
+.navbar-nav {
+    padding-right: 0 !important;
+}
+
+/* Styles exclusive to devices with width > 600px */
+@media screen and (min-width: 768px) {
+    body {
+        overflow-y: hidden;
+    }
+
+    #sidebarMenu {
+        background: var(--side-nav-bg) !important;
+        color: var(--side-nav-text) !important;
+        min-height: 100vh;
+        position: absolute;
+        top: 2.5em;
+        left: 0;
+        bottom: 0;
+        overflow-y: scroll;
+    }
+
+    main {
+        background: var(--primary-background-color);
+        color: var(--primary-text);
+        min-height: 100vh;
+        position: absolute;
+        top: 2em;
+        right: 0;
+        bottom: 0;
+        overflow: auto;
+    }
+
+}

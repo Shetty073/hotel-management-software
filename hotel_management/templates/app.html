@@ -1,0 +1,269 @@
+{# This is the base template which will contain the elemnts that are common to all pages. #}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        Sierra Hotels - {% block title %}Dashboard{% endblock title %}
+    </title>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'icons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'icons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'icons/favicon-16x16.png' %}">
+    <link rel="manifest" href="{% static 'icons/site.webmanifest' %}">
+
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    <!-- script for getting teh csrf-token from cookie -->
+    <script type="text/javascript">
+        let user = '{{ request.user }}'
+
+        function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';')
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim()
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+                        break
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        const csrftoken = getToken('csrftoken');
+    </script>
+    <!-- Fontawesome icons -->
+    <script defer src="{% static 'fa/all.min.js' %}"></script>
+</head>
+
+<body class="light">
+<header class="navbar navbar-dark sticky-top flex-md-nowrap p-0">
+    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+        <i class="fas fa-hotel fa-lg d-none d-sm-inline-block"></i>
+        <span class="d-inline-block d-sm-none" style="margin-right: 1.5em;"></span>
+        Sierra Hotels
+    </a>
+
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+            <a class="nav-link" href="#">
+                <form method="post" action="#">
+                    {% csrf_token %}
+                    <button type="submit" class="signout-button">
+                    Sign out
+                    <i class="fas fa-sign-out-alt fa-lg"></i>
+                    </button>
+                </form>
+            </a>
+        </li>
+    </ul>
+</header>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+            <div class="position-sticky pt-3">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a id="dashboard-link" class="nav-link" aria-current="page" href="{% url 'dashboard' %}">
+                                <span>
+                                    <i class="fas fa-chart-line fa-lg"></i>
+                                </span>
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="bookings-link" class="nav-link" href="{% url 'bookings' %}">
+                                <span>
+                                    <i class="fas fa-calendar-check fa-lg"></i>
+                                </span>
+                            Bookings
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="booked-rooms-link" class="nav-link" href="{% url 'booked_rooms' %}">
+                                <span data-feather="shopping-cart">
+                                    <i class="fas fa-bookmark fa-lg"></i>
+                                </span>
+                            Booked Rooms
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="booked-halls-link" class="nav-link" href="{% url 'booked_halls' %}">
+                                <span data-feather="users">
+                                    <i class="fas fa-chess-rook fa-lg"></i>
+                                </span>
+                            Booked Halls
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="guests-link" class="nav-link" href="{% url 'guests' %}">
+                                <span data-feather="bar-chart-2">
+                                    <i class="fas fa-suitcase-rolling fa-lg"></i>
+                                </span>
+                            Guests
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="food-orders-link" class="nav-link" href="{% url 'food_orders' %}">
+                                <span data-feather="layers">
+                                    <i class="fas fa-utensils fa-lg"></i>
+                                </span>
+                            Food Orders
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="expenses-link" class="nav-link" href="{% url 'expenses' %}">
+                                <span data-feather="layers">
+                                    <i class="fas fa-clipboard fa-lg"></i>
+                                </span>
+                            Expenses
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="payments-link" class="nav-link" href="{% url 'payments' %}">
+                                <span data-feather="layers">
+                                    <i class="fas fa-wallet fa-lg"></i>
+                                </span>
+                            Payments
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="invoices-link" class="nav-link" href="{% url 'invoices' %}">
+                                <span data-feather="layers">
+                                    <i class="fas fa-file-invoice-dollar fa-lg"></i>
+                                </span>
+                            Invoices
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="employees-link" class="nav-link" href="{% url 'employees' %}">
+                                <span data-feather="layers">
+                                    <i class="fas fa-briefcase fa-lg"></i>
+                                </span>
+                            Employees
+                        </a>
+                    </li>
+                </ul>
+
+                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                    <span class="nav-separator">Hotel Configuration</span>
+                    <a class="link-secondary" href="#" aria-label="Add a new report">
+                        <span data-feather="plus-circle"></span>
+                    </a>
+                </h6>
+                <ul class="nav flex-column mb-2">
+
+                    <li class="nav-item">
+                        <a id="room-types-link" class="nav-link" href="{% url 'room_types' %}">
+                                <span data-feather="file-text">
+                                    <i class="fas fa-building fa-lg"></i>
+                                </span>
+                            Room Types
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="rooms-link" class="nav-link" href="{% url 'rooms' %}">
+                                <span data-feather="file-text">
+                                    <i class="fas fa-chess-rook fa-lg"></i>
+                                </span>
+                            Rooms
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="hall-types-link" class="nav-link" href="{% url 'hall_types' %}">
+                                <span data-feather="file-text">
+                                    <i class="fas fa-building fa-lg"></i>
+                                </span>
+                            Hall Types
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="halls-link" class="nav-link" href="{% url 'halls' %}">
+                                <span data-feather="file-text">
+                                    <i class="fas fa-chess-rook fa-lg"></i>
+                                </span>
+                            Halls
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="food-menu-link" class="nav-link" href="{% url 'food_menu' %}">
+                                <span data-feather="file-text">
+                                    <i class="fas fa-hamburger fa-lg"></i>
+                                </span>
+                            Food Menu
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="paid-services-link" class="nav-link" href="{% url 'paid_services' %}">
+                                <span data-feather="file-text">
+                                    <i class="fas fa-book fa-lg"></i>
+                                </span>
+                            Paid Services
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="bank-account-link" class="nav-link" href="{% url 'bank_accounts' %}">
+                                <span data-feather="file-text">
+                                    <i class="fas fa-piggy-bank fa-lg"></i>
+                                </span>
+                            Bank Accounts
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a id="users-link" class="nav-link" href="{% url 'users' %}">
+                                <span data-feather="file-text">
+                                    <i class="fas fa-user-circle fa-lg"></i>
+                                </span>
+                            Users
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </nav>
+
+
+        {% block main %}
+
+        {% endblock main %}
+
+    </div>
+</div>
+
+<script src="{% static 'bootstrap/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'sweetalert/sweetalert.min.js' %}"></script>
+<script src="{% static 'js/app.js' %}"></script>
+
+{% block footer_scripts %}
+{% endblock footer_scripts %}
+</body>
+</html>
