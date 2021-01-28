@@ -1,7 +1,5 @@
-# hotel-management-software
-A web based hotel management software built using Laravel.
+# hotel-management-software 
+A web based hotel management software in django
 
-
-#### Features
-> Will be added soon
+# The old_plain_php_version contains the deprecated version of the code new code will be in django
 
