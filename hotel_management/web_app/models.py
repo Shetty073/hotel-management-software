@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.functional import cached_property
 
 
 class Role(models.Model):
@@ -129,7 +130,7 @@ class Booking(models.Model):
     def __str__(self):
         return f'{self.room.number}'
 
-    @property
+    @cached_property
     def total_days(self):
         delta = self.booked_to - self.booked_from
         return delta.days
@@ -166,7 +167,7 @@ class FoodOrder(models.Model):
     def __str__(self):
         return f'{self.foods.name} {self.booking.guest.name}'
 
-    @property
+    @cached_property
     def total_price(self):
         total = 0
         for food in self.foods.all():
@@ -218,7 +219,7 @@ class Discount(models.Model):
 
 class Invoice(models.Model):
     invoice_no = models.CharField(max_length=20)
-    booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE, blank=True, null=True)
     total_amount = models.DecimalField(max_digits=20, decimal_places=2)
     paid_amount = models.DecimalField(max_digits=20, decimal_places=2)
     pending_amount = models.DecimalField(max_digits=20, decimal_places=2)
@@ -261,48 +262,41 @@ class Invoice(models.Model):
         super(Invoice, self).save(*args, **kwargs)
 
 
+class BankAccount(models.Model):
+    name = models.CharField(max_length=100)
+    initial_balance = models.DecimalField(max_digits=20, decimal_places=2)
+    current_balance = models.DecimalField(max_digits=20, decimal_places=2)
+    is_cash_account = models.BooleanField(default=False)
+
+
 class Payment(models.Model):
     booking = models.ForeignKey(Booking, on_delete=models.CASCADE)
     payment_mode = models.ForeignKey(PaymentMode, on_delete=models.PROTECT)
+    bank_account = models.ForeignKey(BankAccount, on_delete=models.PROTECT)
     total_amount = models.DecimalField(max_digits=20, decimal_places=2)
     paid_amount = models.DecimalField(max_digits=20, decimal_places=2)
     pending_amount = models.DecimalField(max_digits=20, decimal_places=2)
     discount = models.ForeignKey(Discount, blank=True, null=True, on_delete=models.SET_NULL)
     discount_amount = models.DecimalField(max_digits=20, decimal_places=2)
-    paid = 'PAID'
-    partial = 'PARTIAL'
-    unpaid = 'UNPAID'
-    status_choices = (
-        (paid, 'Paid'),
-        (partial, 'Partial'),
-        (unpaid, 'Unpaid'),
-    )
-    status = models.CharField(choices=status_choices, blank=True, null=True, max_length=100)
     remark = models.CharField(max_length=150)
 
     def __str__(self):
         return f'{self.booking.guest.name} {self.total_amount}'
 
-    def set_paid(self):
-        self.status = self.paid
-        self.save(update_fields=['status'])
 
-    def set_partial(self):
-        self.status = self.partial
-        self.save(update_fields=['status'])
+class RestaurantFoodOrder(models.Model):
+    foods = models.ManyToManyField(Food)
+    date = models.DateTimeField(auto_now_add=True)
 
-    def set_unpaid(self):
-        self.status = self.unpaid
-        self.save(update_fields=['status'])
+    def __str__(self):
+        return f'{self.foods.name}'
 
-    def save(self, *args, **kwargs):
-        if self.paid_amount == 0:
-            self.set_unpaid()
-        elif self.pending_amount != 0:
-            self.set_partial()
-        else:
-            self.set_paid()
-        super(Payment, self).save(*args, **kwargs)
+    @cached_property
+    def total_price(self):
+        total = 0
+        for food in self.foods.all():
+            total += food.price_per_serve
+        return total
 
 
 class ChequeDetail(models.Model):
