@@ -21,9 +21,14 @@ urlpatterns = [
     path('delete_room_type', delete_room_type, name='delete_room_type'),
 
     path('rooms', rooms, name='rooms'),
+    path('add_room', add_room, name='add_room'),
+    path('update_room', update_room, name='update_room'),
+    path('delete_room', delete_room, name='delete_room'),
+
     path('hall_types', hall_types, name='hall_types'),
     path('halls', halls, name='halls'),
     path('food_menu', food_menu, name='food_menu'),
     path('paid_services', paid_services, name='paid_services'),
+    path('amenities', amenities, name='amenities'),
     path('users', users, name='users'),
 ]

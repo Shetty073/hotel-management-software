@@ -103,7 +103,7 @@ main {
 
 .nav-link {
     color: var(--side-nav-text);
-    text-transform: uppercase;
+    text-transform: capitalize;
 }
 
 .nav-link.active {
@@ -165,4 +165,8 @@ main {
         overflow: auto;
     }
 
+}
+
+thead {
+    text-transform: uppercase !important;
 }

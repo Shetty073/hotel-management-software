@@ -15,6 +15,10 @@
 
     <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/app.css' %}">
+    
+    {% block header_styles %}
+    {% endblock header_styles %}
+    
     <!-- script for getting teh csrf-token from cookie -->
     <script type="text/javascript">
         let user = '{{ request.user }}'
@@ -44,7 +48,7 @@
 <body class="light">
 <header class="navbar navbar-dark sticky-top flex-md-nowrap p-0">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
-        <i class="fas fa-hotel fa-lg d-none d-sm-inline-block"></i>
+        <i class="fas fa-hotel d-none d-sm-inline-block"></i>
         <span class="d-inline-block d-sm-none" style="margin-right: 1.5em;"></span>
         Sierra Hotels
     </a>
@@ -79,7 +83,7 @@
                     <li class="nav-item">
                         <a id="dashboard-link" class="nav-link" aria-current="page" href="{% url 'dashboard' %}">
                                 <span>
-                                    <i class="fas fa-chart-line fa-lg"></i>
+                                    <i class="fas fa-chart-line"></i>
                                 </span>
                             Dashboard
                         </a>
@@ -88,7 +92,7 @@
                     <li class="nav-item">
                         <a id="bookings-link" class="nav-link" href="{% url 'bookings' %}">
                                 <span>
-                                    <i class="fas fa-calendar-check fa-lg"></i>
+                                    <i class="fas fa-calendar-check"></i>
                                 </span>
                             Bookings
                         </a>
@@ -97,7 +101,7 @@
                     <li class="nav-item">
                         <a id="booked-rooms-link" class="nav-link" href="{% url 'booked_rooms' %}">
                                 <span data-feather="shopping-cart">
-                                    <i class="fas fa-bookmark fa-lg"></i>
+                                    <i class="fas fa-bookmark"></i>
                                 </span>
                             Booked Rooms
                         </a>
@@ -106,7 +110,7 @@
                     <li class="nav-item">
                         <a id="booked-halls-link" class="nav-link" href="{% url 'booked_halls' %}">
                                 <span data-feather="users">
-                                    <i class="fas fa-chess-rook fa-lg"></i>
+                                    <i class="fas fa-chess-rook"></i>
                                 </span>
                             Booked Halls
                         </a>
@@ -115,7 +119,7 @@
                     <li class="nav-item">
                         <a id="guests-link" class="nav-link" href="{% url 'guests' %}">
                                 <span data-feather="bar-chart-2">
-                                    <i class="fas fa-suitcase-rolling fa-lg"></i>
+                                    <i class="fas fa-suitcase-rolling"></i>
                                 </span>
                             Guests
                         </a>
@@ -124,7 +128,7 @@
                     <li class="nav-item">
                         <a id="food-orders-link" class="nav-link" href="{% url 'food_orders' %}">
                                 <span data-feather="layers">
-                                    <i class="fas fa-utensils fa-lg"></i>
+                                    <i class="fas fa-utensils"></i>
                                 </span>
                             Food Orders
                         </a>
@@ -133,7 +137,7 @@
                     <li class="nav-item">
                         <a id="expenses-link" class="nav-link" href="{% url 'expenses' %}">
                                 <span data-feather="layers">
-                                    <i class="fas fa-clipboard fa-lg"></i>
+                                    <i class="fas fa-clipboard"></i>
                                 </span>
                             Expenses
                         </a>
@@ -142,7 +146,7 @@
                     <li class="nav-item">
                         <a id="payments-link" class="nav-link" href="{% url 'payments' %}">
                                 <span data-feather="layers">
-                                    <i class="fas fa-wallet fa-lg"></i>
+                                    <i class="fas fa-wallet"></i>
                                 </span>
                             Payments
                         </a>
@@ -151,7 +155,7 @@
                     <li class="nav-item">
                         <a id="invoices-link" class="nav-link" href="{% url 'invoices' %}">
                                 <span data-feather="layers">
-                                    <i class="fas fa-file-invoice-dollar fa-lg"></i>
+                                    <i class="fas fa-file-invoice-dollar"></i>
                                 </span>
                             Invoices
                         </a>
@@ -160,7 +164,7 @@
                     <li class="nav-item">
                         <a id="employees-link" class="nav-link" href="{% url 'employees' %}">
                                 <span data-feather="layers">
-                                    <i class="fas fa-briefcase fa-lg"></i>
+                                    <i class="fas fa-briefcase"></i>
                                 </span>
                             Employees
                         </a>
@@ -178,7 +182,7 @@
                     <li class="nav-item">
                         <a id="room-types-link" class="nav-link" href="{% url 'room_types' %}">
                                 <span data-feather="file-text">
-                                    <i class="fas fa-building fa-lg"></i>
+                                    <i class="fas fa-building"></i>
                                 </span>
                             Room Types
                         </a>
@@ -187,7 +191,7 @@
                     <li class="nav-item">
                         <a id="rooms-link" class="nav-link" href="{% url 'rooms' %}">
                                 <span data-feather="file-text">
-                                    <i class="fas fa-chess-rook fa-lg"></i>
+                                    <i class="fas fa-chess-rook"></i>
                                 </span>
                             Rooms
                         </a>
@@ -196,7 +200,7 @@
                     <li class="nav-item">
                         <a id="hall-types-link" class="nav-link" href="{% url 'hall_types' %}">
                                 <span data-feather="file-text">
-                                    <i class="fas fa-building fa-lg"></i>
+                                    <i class="fas fa-building"></i>
                                 </span>
                             Hall Types
                         </a>
@@ -205,7 +209,7 @@
                     <li class="nav-item">
                         <a id="halls-link" class="nav-link" href="{% url 'halls' %}">
                                 <span data-feather="file-text">
-                                    <i class="fas fa-chess-rook fa-lg"></i>
+                                    <i class="fas fa-chess-rook"></i>
                                 </span>
                             Halls
                         </a>
@@ -214,7 +218,7 @@
                     <li class="nav-item">
                         <a id="food-menu-link" class="nav-link" href="{% url 'food_menu' %}">
                                 <span data-feather="file-text">
-                                    <i class="fas fa-hamburger fa-lg"></i>
+                                    <i class="fas fa-hamburger"></i>
                                 </span>
                             Food Menu
                         </a>
@@ -223,16 +227,25 @@
                     <li class="nav-item">
                         <a id="paid-services-link" class="nav-link" href="{% url 'paid_services' %}">
                                 <span data-feather="file-text">
-                                    <i class="fas fa-book fa-lg"></i>
+                                    <i class="fas fa-book"></i>
                                 </span>
                             Paid Services
                         </a>
                     </li>
 
                     <li class="nav-item">
+                        <a id="amenities-link" class="nav-link" href="{% url 'amenities' %}">
+                                <span data-feather="file-text">
+                                    <i class="fas fa-taxi"></i>
+                                </span>
+                            Amenities
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
                         <a id="bank-account-link" class="nav-link" href="{% url 'bank_accounts' %}">
                                 <span data-feather="file-text">
-                                    <i class="fas fa-piggy-bank fa-lg"></i>
+                                    <i class="fas fa-piggy-bank"></i>
                                 </span>
                             Bank Accounts
                         </a>
@@ -241,7 +254,7 @@
                     <li class="nav-item">
                         <a id="users-link" class="nav-link" href="{% url 'users' %}">
                                 <span data-feather="file-text">
-                                    <i class="fas fa-user-circle fa-lg"></i>
+                                    <i class="fas fa-user-circle"></i>
                                 </span>
                             Users
                         </a>

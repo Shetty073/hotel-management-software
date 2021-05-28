@@ -65,13 +65,13 @@
     <br><br>
 
     <h5>List of room types</h5>
-    <div class="table-responsive">
+    <div class="table-responsive mb-5">
         <table class="table table-bordered">
             <thead class="table-dark">
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Description</th>
-                    <th scope="col">Actions</th>
+                    <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,7 +79,7 @@
                 <tr>
                     <td>{{ room_type.name }}</td>
                     <td>{{ room_type.description }}</td>
-                    <td>
+                    <td class="text-center">
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
                             <button type="button" id="{{ room_type.pk }}" class="btn btn-primary editDataRowBtn">
                                 <i class="far fa-edit"></i>

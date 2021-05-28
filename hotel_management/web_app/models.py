@@ -99,6 +99,7 @@ class Room(models.Model):
     name = models.CharField(max_length=100)
     room_type = models.ForeignKey(RoomType, on_delete=models.CASCADE)
     price_per_night = models.DecimalField(max_digits=20, decimal_places=2)
+    marked_for_housekeep = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -185,6 +186,14 @@ class ServiceType(models.Model):
 
 
 class Service(models.Model):
+    name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=20, decimal_places=2)
+
+    def __str__(self):
+        return self.name
+
+
+class Amenity(models.Model):
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=20, decimal_places=2)
 

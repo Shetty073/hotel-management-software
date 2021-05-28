@@ -1,31 +1,145 @@
 {% extends 'app.html' %}
 {% load static %}
 {% block title %}Rooms{% endblock title %}
+{% block header_styles %}
+<link rel="stylesheet" href="{% static 'css/rooms.css' %}">
+{% endblock header_styles %}
 {% block main %}
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Rooms</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                </div>
-                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                    <span data-feather="calendar"></span>
-                    This week
-                </button>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Rooms</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
             </div>
         </div>
+    </div>
 
-        <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+    <div id="createForm">
+        <h5>Add new room</h5>
+        <form action="{% url 'add_room' %}" method="post">
+            {% csrf_token %}
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <label for="room_type" class="form-label">Room Type</label>
+                    <select class="form-control" id="room_type" name="room_type">
+                        {% for room_type in room_types %}
+                            <option value="{{ room_type.pk }}">{{ room_type.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label for="number" class="form-label">Room Number</label>
+                    <input type="text" class="form-control" id="number" name="number"
+                        placeholder="S101, MS210, etc..." required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <label for="name" class="form-label">Room Name</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                        placeholder="Ocean Facing, Maharaja Suite, etc." required>
+                </div>
+                <div class="col-sm-4">
+                    <label for="price_per_night" class="form-label">Price Per Night Of Stay</label>
+                    <input type="number" class="form-control" id="price_per_night" name="price_per_night" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-        <h2>Section title</h2>
+    <div id="editForm" hidden>
+        <h5>Update room</h5>
+        <form action="{% url 'update_room' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="pk" name="pk">
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <label for="new_room_type" class="form-label">Room Type</label>
+                    <select class="form-control" id="new_room_type" name="room_type">
+                        {% for room_type in room_types %}
+                            <option value="{{ room_type.pk }}">{{ room_type.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label for="new_number" class="form-label">Room Number</label>
+                    <input type="text" class="form-control" id="new_number" name="number"
+                        placeholder="S101, MS210, etc..." required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <label for="new_name" class="form-label">Room Name</label>
+                    <input type="text" class="form-control" id="new_name" name="name"
+                        placeholder="Ocean Facing, Maharaja Suite, etc." required>
+                </div>
+                <div class="col-sm-4">
+                    <label for="new_price_per_night" class="form-label">Price Per Night Of Stay</label>
+                    <input type="number" class="form-control" id="new_price_per_night" name="price_per_night" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.reload()">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-    </main>
+    <br><br>
+
+    <h5>List of room types</h5>
+    <div class="table-responsive mb-5">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Price Per Night</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for room in rooms %}
+                <tr>
+                    <td>{{ room.number }}</td>
+                    <td>{{ room.name }}</td>
+                    <td>{{ room.room_type.name }}</td>
+                    <td>{{ room.price_per_night }}</td>
+                    <td hidden>{{ room.room_type.pk }}</td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" id="{{ room.pk }}" class="btn btn-primary editDataRowBtn">
+                                <i class="far fa-edit"></i>
+                            </button>
+                            <button type="button" id="{{ room.pk }}" class="btn btn-danger deleteDataRowBtn">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <input type="hidden" id="deleteUrl" value="{% url 'delete_room' %}">
+
+</main>
 {% endblock main %}
 
 {% block footer_scripts %}
-    <script type="text/javascript">
-        document.querySelector('#rooms-link').classList.add('active');
-    </script>
+<script type="text/javascript">
+    document.querySelector('#rooms-link').classList.add('active');
+</script>
+<script src="{% static 'js/rooms.js' %}"></script>
 {% endblock footer_scripts %}
