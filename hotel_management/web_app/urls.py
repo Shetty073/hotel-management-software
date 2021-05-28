@@ -14,7 +14,12 @@ urlpatterns = [
     path('bank_accounts', bank_accounts, name='bank_accounts'),
     path('invoices', invoices, name='invoices'),
     path('employees', employees, name='employees'),
+
     path('room_types', room_types, name='room_types'),
+    path('add_room_type', add_room_type, name='add_room_type'),
+    path('update_room_type', update_room_type, name='update_room_type'),
+    path('delete_room_type', delete_room_type, name='delete_room_type'),
+
     path('rooms', rooms, name='rooms'),
     path('hall_types', hall_types, name='hall_types'),
     path('halls', halls, name='halls'),

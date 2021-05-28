@@ -2,30 +2,106 @@
 {% load static %}
 {% block title %}Room Types{% endblock title %}
 {% block main %}
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Room Types</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-                <div class="btn-group me-2">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-                    <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-                </div>
-                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                    <span data-feather="calendar"></span>
-                    This week
-                </button>
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Room Types</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
             </div>
         </div>
+    </div>
 
-        <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+    <div id="createForm">
+        <h5>Add new room type</h5>
+        <form action="{% url 'add_room_type' %}" method="post">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <label for="name" class="form-label">Room Type Name</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                        placeholder="Single, Double, Quad, Queen, etc." required>
+                </div>
+                <div class="col-sm-4">
+                    <label for="description" class="form-label">Room Type Description</label>
+                    <textarea class="form-control" id="description" rows="1" name="description"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-        <h2>Section title</h2>
+    <div id="editForm" hidden>
+        <h5>Update room type</h5>
+        <form action="{% url 'update_room_type' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="pk" name="pk">
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <label for="newname" class="form-label">Room Type Name</label>
+                    <input type="text" class="form-control" id="newname" name="name"
+                        placeholder="Single, Double, Quad, Queen, etc." required>
+                </div>
+                <div class="col-sm-4">
+                    <label for="newdescription" class="form-label">Room Type Description</label>
+                    <textarea class="form-control" id="newdescription" rows="1" name="description"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.reload()">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-    </main>
+    <br><br>
+
+    <h5>List of room types</h5>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for room_type in room_types %}
+                <tr>
+                    <td>{{ room_type.name }}</td>
+                    <td>{{ room_type.description }}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" id="{{ room_type.pk }}" class="btn btn-primary editDataRowBtn">
+                                <i class="far fa-edit"></i>
+                            </button>
+                            <button type="button" id="{{ room_type.pk }}" 
+                            class="btn btn-danger deleteDataRowBtn">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <input type="hidden" id="deleteUrl" value="{% url 'delete_room_type' %}">
+</main>
 {% endblock main %}
 
 {% block footer_scripts %}
-    <script type="text/javascript">
-        document.querySelector('#room-types-link').classList.add('active');
-    </script>
+<script type="text/javascript">
+    document.querySelector('#room-types-link').classList.add('active');
+</script>
+<script src="{% static 'js/roomtypes.js' %}"></script>
 {% endblock footer_scripts %}
