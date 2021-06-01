@@ -22,7 +22,7 @@ document.querySelectorAll('.editDataRowBtn').forEach(item => {
         let pricePerNight = pricePerNightTd.innerText;
         
         document.querySelector('#new_number').value = roomNumber;
-        document.querySelector('#new_room_type').value = roomType;
+        document.querySelector('#new_type').value = roomType;
         document.querySelector('#new_name').value = name;
         document.querySelector('#new_price_per_night').value = pricePerNight;
         

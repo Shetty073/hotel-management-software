@@ -62,8 +62,8 @@
             <input type="hidden" id="pk" name="pk">
             <div class="row mb-2">
                 <div class="col-sm-4">
-                    <label for="new_room_type" class="form-label">Room Type</label>
-                    <select class="form-control" id="new_room_type" name="room_type">
+                    <label for="new_type" class="form-label">Room Type</label>
+                    <select class="form-control" id="new_type" name="room_type">
                         {% for room_type in room_types %}
                             <option value="{{ room_type.pk }}">{{ room_type.name }}</option>
                         {% endfor %}
@@ -141,5 +141,5 @@
 <script type="text/javascript">
     document.querySelector('#rooms-link').classList.add('active');
 </script>
-<script src="{% static 'js/rooms.js' %}"></script>
+<script src="{% static 'js/rooms_halls.js' %}"></script>
 {% endblock footer_scripts %}

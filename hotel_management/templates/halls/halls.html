@@ -17,9 +17,122 @@
             </div>
         </div>
 
-        <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+        <div id="createForm">
+        <h5>Add new hall</h5>
+        <form action="{% url 'add_hall' %}" method="post">
+            {% csrf_token %}
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <label for="hall_type" class="form-label">Hall Type</label>
+                    <select class="form-control" id="hall_type" name="hall_type">
+                        {% for hall_type in hall_types %}
+                            <option value="{{ hall_type.pk }}">{{ hall_type.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label for="number" class="form-label">Hall Number</label>
+                    <input type="text" class="form-control" id="number" name="number"
+                        placeholder="H101, BH210, etc..." required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <label for="name" class="form-label">Hall Name</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                        placeholder="Beach Banquet Hall, Terrace Hall, etc." required>
+                </div>
+                <div class="col-sm-4">
+                    <label for="price_per_night" class="form-label">Price Per Night</label>
+                    <input type="number" class="form-control" id="price_per_night" name="price_per_night" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-        <h2>Section title</h2>
+    <div id="editForm" hidden>
+        <h5>Update hall</h5>
+        <form action="{% url 'update_hall' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="pk" name="pk">
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <label for="new_type" class="form-label">Hall Type</label>
+                    <select class="form-control" id="new_type" name="hall_type">
+                        {% for hall_type in hall_types %}
+                            <option value="{{ hall_type.pk }}">{{ hall_type.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <label for="new_number" class="form-label">Hall Number</label>
+                    <input type="text" class="form-control" id="new_number" name="number"
+                        placeholder="H101, BH210, etc..." required>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <label for="new_name" class="form-label">Hall Name</label>
+                    <input type="text" class="form-control" id="new_name" name="name"
+                        placeholder="Beach Banquet Hall, Terrace Hall, etc." required>
+                </div>
+                <div class="col-sm-4">
+                    <label for="new_price_per_night" class="form-label">Price Per Night</label>
+                    <input type="number" class="form-control" id="new_price_per_night" name="price_per_night" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.reload()">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <br><br>
+
+    <h5>List of hall types</h5>
+    <div class="table-responsive mb-5">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Number</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Price Per Night</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hall in halls %}
+                <tr>
+                    <td>{{ hall.number }}</td>
+                    <td>{{ hall.name }}</td>
+                    <td>{{ hall.hall_type.name }}</td>
+                    <td>{{ hall.price_per_night }}</td>
+                    <td hidden>{{ hall.hall_type.pk }}</td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" id="{{ hall.pk }}" class="btn btn-primary editDataRowBtn">
+                                <i class="far fa-edit"></i>
+                            </button>
+                            <button type="button" id="{{ hall.pk }}" class="btn btn-danger deleteDataRowBtn">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <input type="hidden" id="deleteUrl" value="{% url 'delete_hall' %}">
 
     </main>
 {% endblock main %}
@@ -28,4 +141,5 @@
     <script type="text/javascript">
         document.querySelector('#halls-link').classList.add('active');
     </script>
+    <script src="{% static 'js/rooms_halls.js' %}"></script>
 {% endblock footer_scripts %}

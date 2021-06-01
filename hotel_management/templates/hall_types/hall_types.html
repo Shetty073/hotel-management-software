@@ -10,16 +10,91 @@
                     <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
                     <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
                 </div>
-                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                    <span data-feather="calendar"></span>
-                    This week
-                </button>
             </div>
         </div>
 
-        <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+        <div id="createForm">
+        <h5>Add new hall type</h5>
+        <form action="{% url 'add_hall_type' %}" method="post">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <label for="name" class="form-label">Hall Type Name</label>
+                    <input type="text" class="form-control" id="name" name="name"
+                        placeholder="Banquet, Wedding, Corporate Meet, etc." required>
+                </div>
+                <div class="col-sm-4">
+                    <label for="description" class="form-label">Hall Type Description</label>
+                    <textarea class="form-control" id="description" rows="1" name="description"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
 
-        <h2>Section title</h2>
+    <div id="editForm" hidden>
+        <h5>Update hall type</h5>
+        <form action="{% url 'update_hall_type' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="pk" name="pk">
+            <div class="row mb-3">
+                <div class="col-sm-4">
+                    <label for="newname" class="form-label">Hall Type Name</label>
+                    <input type="text" class="form-control" id="newname" name="name"
+                        placeholder="Banquet, Wedding, Corporate Meet, etc." required>
+                </div>
+                <div class="col-sm-4">
+                    <label for="newdescription" class="form-label">Hall Type Description</label>
+                    <textarea class="form-control" id="newdescription" rows="1" name="description"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <button type="submit" class="btn btn-success">Update</button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.reload()">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <br><br>
+
+    <h5>List of hall types</h5>
+    <div class="table-responsive mb-5">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hall_type in hall_types %}
+                <tr>
+                    <td>{{ hall_type.name }}</td>
+                    <td>{{ hall_type.description }}</td>
+                    <td class="text-center">
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" id="{{ hall_type.pk }}" class="btn btn-primary editDataRowBtn">
+                                <i class="far fa-edit"></i>
+                            </button>
+                            <button type="button" id="{{ hall_type.pk }}" 
+                            class="btn btn-danger deleteDataRowBtn">
+                                <i class="far fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <input type="hidden" id="deleteUrl" value="{% url 'delete_hall_type' %}">
 
     </main>
 {% endblock main %}
@@ -28,4 +103,5 @@
     <script type="text/javascript">
         document.querySelector('#hall-types-link').classList.add('active');
     </script>
+    <script src="{% static 'js/room_hall_types.js' %}"></script>
 {% endblock footer_scripts %}

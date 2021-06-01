@@ -26,7 +26,15 @@ urlpatterns = [
     path('delete_room', delete_room, name='delete_room'),
 
     path('hall_types', hall_types, name='hall_types'),
+    path('add_hall_type', add_hall_type, name='add_hall_type'),
+    path('update_hall_type', update_hall_type, name='update_hall_type'),
+    path('delete_hall_type', delete_hall_type, name='delete_hall_type'),
+
     path('halls', halls, name='halls'),
+    path('add_hall', add_hall, name='add_hall'),
+    path('update_hall', update_hall, name='update_hall'),
+    path('delete_hall', delete_hall, name='delete_hall'),
+
     path('food_menu', food_menu, name='food_menu'),
     path('paid_services', paid_services, name='paid_services'),
     path('amenities', amenities, name='amenities'),

@@ -6,7 +6,6 @@ document.querySelectorAll('.deleteDataRowBtn').forEach(item => {
     item.addEventListener('click', function () {
         let url = document.querySelector('#deleteUrl').value;
         let pk = this.id;
-        console.log(csrftoken);
 
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
