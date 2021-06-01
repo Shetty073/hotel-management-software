@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 import json
 
-
+# * room type views
 def room_types(request):
     room_types = RoomType.objects.all()
 
@@ -62,6 +62,7 @@ def delete_room_type(request):
     return JsonResponse(response)
 
 
+# * room views
 def rooms(request):
     room_types = RoomType.objects.all()
     rooms = Room.objects.all()
@@ -130,6 +131,7 @@ def delete_room(request):
     return JsonResponse(response)
 
 
+# * hall type views
 def hall_types(request):
     hall_types = HallType.objects.all()
 
@@ -187,6 +189,7 @@ def delete_hall_type(request):
     return JsonResponse(response)
 
 
+# * hall views
 def halls(request):
     hall_types = HallType.objects.all()
     halls = Hall.objects.all()
