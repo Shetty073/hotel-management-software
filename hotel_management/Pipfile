@@ -6,8 +6,9 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-django = "*"
+django = "==3.2.7"
 pymysql = "*"
+pytz = "==2021.3"
 
 [requires]
 python_version = "3.9"
