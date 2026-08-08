@@ -1,3 +1,5 @@
+# This is deprecated, please refer ![Alaya Core PMS](https://github.com/Shetty073/alaya-core-pms) for the new project which I am working on right now and would be supporting for the long run. Please feel free to contribute.
+
 # hotel-management-software 
 A web based hotel management software in django
 
